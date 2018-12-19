@@ -175,6 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Reliese Code:model
+        Reliese\Coders\CodersServiceProvider::class,
+
     ],
 
     /*
