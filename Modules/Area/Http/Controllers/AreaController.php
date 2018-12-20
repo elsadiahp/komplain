@@ -40,7 +40,9 @@ class AreaController extends Controller
         $area = new Area;
 
         $area->area_nama = $request->area_nama;
-        // dd($area);
+        $area->waktu = $request->waktu;
+        $area->tanggal = $request->tanggal;
+        dd($area);
         $area->save();
 
         Session::flash('success', $area->area_nama . ' berhasil ditambahkan!');

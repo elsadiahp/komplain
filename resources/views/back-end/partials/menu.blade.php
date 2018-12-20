@@ -3,7 +3,7 @@
           <ul class="nav">
             <li class="nav-item">
               <a class="nav-link" href="{{ route('area.index')}}">
-                <i class="nav-icon icon-speedometer"></i> Dashboard
+                <i class="nav-icon icon-speedometer"></i> Dashbord
               </a>
             </li>
             <li class="nav-item">
