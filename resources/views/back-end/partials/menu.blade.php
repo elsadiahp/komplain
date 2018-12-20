@@ -8,7 +8,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('area.index')}}">
-                <i class="nav-icon icon-speedometer"></i> Area
+                <i class="nav-icon icon-speedometer"></i> Area 
               </a>
             </li>
           </ul>

@@ -5,6 +5,8 @@ namespace Modules\Area\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Models\Area;
+use Session;
 
 class AreaController extends Controller
 {
@@ -14,7 +16,9 @@ class AreaController extends Controller
      */
     public function index()
     {
-        return view('area::index');
+        $area = Area::paginate(10);;
+        $no = 1;
+        return view('area::index', compact(['area','no']));
     }
 
     /**
@@ -23,7 +27,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('area::create');
+        return view('area::create', compact('area'));
     }
 
     /**
@@ -33,6 +37,15 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
+        $area = new Area;
+
+        $area->area_nama = $request->area_nama;
+        // dd($area);
+        $area->save();
+
+        Session::flash('success', $area->area_nama . ' berhasil ditambahkan!');
+
+        return redirect()->route('area.index');
     }
 
     /**
@@ -48,9 +61,10 @@ class AreaController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('area::edit');
+        $area = Area::find($id);
+        return view('area::edit', compact('area'));
     }
 
     /**
@@ -58,15 +72,24 @@ class AreaController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $area = Area::find($id);
+
+        $area->area_nama = $request->area_nama;
+        $area->save();
+
+        return redirect()->route('area.index');
     }
 
     /**
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+    public function destroy($id)
     {
+        $area = Area::find($id);
+        $area->delete();
+        return redirect()->route('area.index');
     }
 }
