@@ -12,5 +12,5 @@
 */
 
 Route::prefix('waroeng')->group(function() {
-    Route::get('/', 'WaroengController@index');
+    Route::get('/', 'WaroengController@index')->name('waroeng.index');
 });

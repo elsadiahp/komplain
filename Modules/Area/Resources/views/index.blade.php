@@ -13,6 +13,7 @@
                     <strong>Delete! </strong>{{ Session::get('delete')}}
                 </div>                    
             @endif
+            <h1>Area</h1>
             <a href="{{ route('area.create')}}" class="btn btn-primary btn-sm pull-right" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>
             <table class="table table-bordered">
                 <thead>
