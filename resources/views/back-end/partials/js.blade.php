@@ -10,3 +10,4 @@
 <script src="node_modules/@coreui/coreui-plugin-chartjs-custom-tooltips/dist/js/custom-tooltips.min.js"></script>
 <script src="{{ asset('back-end/js/main.js')}}"></script>
 <script src="{{ asset('back-end/js/custom.js')}}"></script>
+<script src="{{ asset('back-end/js/custom2.js')}}"></script>

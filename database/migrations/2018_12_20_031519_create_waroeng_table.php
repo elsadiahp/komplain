@@ -18,6 +18,7 @@ class CreateWaroengTable extends Migration
             $table->string('waroeng_nama');
             $table->string('waroeng_alamat');
             $table->unsignedInteger('area_id');
+            $table->foreign('area_id')->references('area_id')->on('area');
             $table->timestamps();
         });
     }
