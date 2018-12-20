@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Kategori;
 use Redirect;
+use Session;
 
 
 class KategoriController extends Controller
@@ -42,6 +43,8 @@ class KategoriController extends Controller
         $kat = new Kategori();
         $kat->nama_kategori = $request->kat;
         $kat->save();
+
+        Session::flash('success', $kat->nama_kategori . ' berhasil ditambahkan!');
 
         return Redirect::route('kategori.index');
     }
@@ -87,6 +90,8 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
         $kategori->delete();
+
+        Session::flash('delete', $kategori->nama_kategori . ' berhasil dihapus!');
 
         return Redirect::route('kategori.index');
     }
