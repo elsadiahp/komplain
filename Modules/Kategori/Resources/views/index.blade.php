@@ -2,6 +2,9 @@
 
 @section('content')
     <h1>Kategori</h1>
+    <br>
+    <a href="{{route('tambah.kategori')}}" class="btn btn-primary">Tambah</a>
+    <br>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,5 +30,4 @@
         @endforeach
         </tbody>
     </table>
-    <a href="{{route('tambah.kategori')}}" class="btn btn-primary">Tambah</a>
 @stop

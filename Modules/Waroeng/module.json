@@ -1,0 +1,14 @@
+{
+    "name": "Waroeng",
+    "alias": "waroeng",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Waroeng\\Providers\\WaroengServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
