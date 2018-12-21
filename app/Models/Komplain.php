@@ -32,10 +32,10 @@ class Komplain extends Eloquent
 	protected $table = 'komplain';
 	protected $primaryKey = 'komplain_id';
 
-//	protected $casts = [
-//		'waroeng_id' => 'int',
-//		'id_kategori' => 'int'
-//	];
+	protected $casts = [
+		'waroeng_id' => 'int',
+		'id_kategori' => 'int'
+	];
 
 	protected $dates = [
 		'tanggal_komplain',
