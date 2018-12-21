@@ -45,7 +45,7 @@ class KomplainController extends Controller
      */
     public function store(Request $request)
     {
-        $komplain = new Komplain;
+        $komplain = new Komplain();
 
         $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
@@ -53,7 +53,7 @@ class KomplainController extends Controller
         $komplain->isi_komplain = $request->isi_komplain;
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
-        
+
         // dd([$request->tanggal_komplain, $request->waktu_komplain]);
 
         // $tanggal = str_replace("-", "", $request->tanggal_komplain);
@@ -61,11 +61,11 @@ class KomplainController extends Controller
         // $komplain->tanggal_komplain = Carbon::parse($tanggal)->format('Y-m-d');
         // $komplain->waktu_komplain = Carbon::parse($waktu)->format('H:m:s');
 
-        dd($request->waktu_komplain);
+//        dd($utgl);
         $komplain->save();
 
         Session::flash('success',' Komplain added successfully');
-        return redirect()->route('komplain.index');
+        return Redirect::route('komplain.index');
     }
 
     /**

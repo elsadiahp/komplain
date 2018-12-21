@@ -2,51 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa71e564-4991-4d57-975b-c4604ae29cde" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Config/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Config/config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Console/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Database/Migrations/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Database/Seeders/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Database/Seeders/KomplainDatabaseSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Database/factories/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Entities/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Http/Controllers/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Http/Middleware/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Http/Requests/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Providers/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Providers/KomplainServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/assets/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/assets/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/assets/sass/app.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/lang/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/layouts/master.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Routes/api.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Routes/web.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/Tests/.gitkeep" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/composer.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/module.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Modules/Komplain/webpack.mix.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Komplain.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/TbKategori.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Waroeng.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2018_12_20_031520_create_komplain_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2018_12_20_083956_add_new_column_on_komplain_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/back-end/js/custom2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/back-end/js/custom3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Modules/Area/Http/Controllers/AreaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Area/Http/Controllers/AreaController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Modules/Waroeng/Routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/Modules/Waroeng/Routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Area.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Area.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_20_031519_create_waroeng_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_20_031519_create_waroeng_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/partials/js.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/partials/js.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Komplain.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Komplain.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +15,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="DatabaseView">
@@ -84,60 +45,59 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://D:/LARAVEL/Template/AdminBSBMaterialDesign-master/AdminBSBMaterialDesign-master/index.html">
+        <entry file="file://$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-54">
-              <caret line="1078" column="28" selection-start-line="1078" selection-start-column="21" selection-end-line="1078" selection-end-column="28" />
+            <state relative-caret-position="398">
+              <caret line="43" column="72" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/app.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="230" column="60" selection-start-line="230" selection-start-column="60" selection-end-line="230" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Modules/Area/Resources/views/create.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            <state relative-caret-position="262">
+              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Modules/Area/Http/Controllers/AreaController.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+            <state relative-caret-position="364">
+              <caret line="60" column="45" lean-forward="true" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
               <folding>
-                <element signature="e#49#77#0#PHP" expanded="true" />
+                <element signature="e#53#81#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Models/Komplain.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="7" selection-end-column="17" />
+            <state relative-caret-position="338">
+              <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="37" selection-end-column="6" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/web.php">
+        <entry file="file://$PROJECT_DIR$/Modules/Waroeng/Http/Controllers/WaroengController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="1100">
+              <caret line="83" column="27" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
+              <folding>
+                <element signature="e#52#72#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Modules/Komplain/Routes/web.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -148,8 +108,8 @@
       <find>browse</find>
       <find>card</find>
       <find>drop</find>
-      <find>browser</find>
       <find>Charts</find>
+      <find>browser</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,13 +129,11 @@
         <option value="$PROJECT_DIR$/Modules/Waroeng/Resources/views/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Waroeng.php" />
         <option value="$PROJECT_DIR$/Modules/Waroeng/Resources/views/edit.blade.php" />
-        <option value="$PROJECT_DIR$/Modules/Waroeng/Routes/web.php" />
         <option value="$PROJECT_DIR$/Modules/Waroeng/Http/Controllers/WaroengController.php" />
         <option value="$PROJECT_DIR$/Modules/Kategori/Http/Controllers/KategoriController.php" />
         <option value="$PROJECT_DIR$/resources/views/back-end/app.blade.php" />
         <option value="$PROJECT_DIR$/Modules/Waroeng/Resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/Modules/Kategori/Resources/views/index.blade.php" />
-        <option value="$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/public/back-end/css/style.css" />
         <option value="$PROJECT_DIR$/Modules/Laporan/Resources/views/index.blade.php" />
         <option value="$PROJECT_DIR$/Modules/Laporan/Routes/web.php" />
@@ -185,6 +143,11 @@
         <option value="$PROJECT_DIR$/Modules/Area/Resources/views/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php" />
         <option value="$PROJECT_DIR$/Modules/Area/Http/Controllers/AreaController.php" />
+        <option value="$PROJECT_DIR$/Modules/Waroeng/Routes/web.php" />
+        <option value="$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php" />
+        <option value="$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Models/Komplain.php" />
+        <option value="$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php" />
       </list>
     </option>
   </component>
@@ -286,7 +249,7 @@
       <path value="$PROJECT_DIR$/vendor/balping/json-raw-encoder" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="793" />
     <option name="width" value="814" />
     <option name="height" value="867" />
@@ -308,6 +271,17 @@
             <path>
               <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Models" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="Modules" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -315,6 +289,21 @@
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="Modules" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Area" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Modules" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Area" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="Modules" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Area" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="komplain" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -407,18 +396,19 @@
       <updated>1545204615558</updated>
       <workItem from="1545204617316" duration="1052000" />
       <workItem from="1545206407870" duration="6658000" />
-      <workItem from="1545271215201" duration="21168000" />
+      <workItem from="1545271215201" duration="22445000" />
+      <workItem from="1545364222190" duration="5214000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23433000" />
+    <option name="totallyTimeSpent" value="29924000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="793" y="0" width="814" height="867" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.113753214" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.23740053" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -433,7 +423,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289855" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3710145" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.0456621" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -553,16 +543,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Waroeng/Http/Controllers/WaroengController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="100" selection-start-line="100" selection-end-line="101" />
-          <folding>
-            <element signature="e#52#72#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Kategori/Http/Controllers/KategoriController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-316">
@@ -584,24 +564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Waroeng/Routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
-          <folding>
-            <element signature="e#653#680#0#HTML" expanded="true" />
-            <element signature="e#967#993#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -629,62 +591,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/LARAVEL/Template/AdminBSBMaterialDesign-master/AdminBSBMaterialDesign-master/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="1078" column="28" selection-start-line="1078" selection-start-column="21" selection-end-line="1078" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Resources/views/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="230" column="60" selection-start-line="230" selection-start-column="60" selection-end-line="230" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Resources/views/piechart.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Http/Controllers/LaporanController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="60" column="16" lean-forward="true" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="16" />
-          <folding>
-            <element signature="e#52#72#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Resources/views/index.blade.php" />
+    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Routes/web.php" />
+    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Resources/views/piechart.blade.php" />
+    <entry file="file://$PROJECT_DIR$/Modules/Laporan/Http/Controllers/LaporanController.php" />
     <entry file="file://$PROJECT_DIR$/Modules/Area/Resources/views/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="454">
           <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -697,10 +611,82 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Modules/Area/Http/Controllers/AreaController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="41" column="47" lean-forward="true" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+        <state relative-caret-position="1028">
+          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
           <folding>
             <element signature="e#49#77#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/back-end/partials/menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="409">
+          <caret line="230" column="60" selection-start-line="230" selection-start-column="60" selection-end-line="230" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/LARAVEL/Template/AdminBSBMaterialDesign-master/AdminBSBMaterialDesign-master/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-54">
+          <caret line="1078" column="28" selection-start-line="1078" selection-start-column="21" selection-end-line="1078" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Waroeng/Routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="22" column="97" selection-start-line="22" selection-start-column="97" selection-end-line="22" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Komplain/Routes/web.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Waroeng/Http/Controllers/WaroengController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1100">
+          <caret line="83" column="27" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="27" />
+          <folding>
+            <element signature="e#52#72#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Area/Resources/views/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Komplain/Resources/views/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="43" column="72" selection-start-line="43" selection-start-column="72" selection-end-line="43" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Komplain.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="34" column="4" selection-start-line="34" selection-start-column="4" selection-end-line="37" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Modules/Komplain/Http/Controllers/KomplainController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="60" column="45" lean-forward="true" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
+          <folding>
+            <element signature="e#53#81#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

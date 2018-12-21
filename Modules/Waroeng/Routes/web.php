@@ -13,7 +13,7 @@
 
 Route::prefix('waroeng')->group(function() {
     Route::get('/', 'WaroengController@index')->name('waroeng.index');
-<<<<<<< HEAD
+
     Route::get('/tambah', 'WaroengController@create')->name('tambah.waroeng');
     Route::post('/store', 'WaroengController@store')->name('simpan.waroeng');
 
@@ -21,6 +21,4 @@ Route::prefix('waroeng')->group(function() {
     Route::put('/update/{waroeng_id}', 'WaroengController@update')->name('update.waroeng');
 
     Route::delete('/destroy/{waroeng_id}', 'WaroengController@destroy')->name('destroy.waroeng');
-=======
->>>>>>> elsa
 });
