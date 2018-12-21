@@ -2,9 +2,13 @@
 
 namespace Modules\Waroeng\Http\Controllers;
 
+use App\Models\Area;
+use App\Waroeng;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Redirect;
+use Session;
 
 class WaroengController extends Controller
 {
@@ -14,7 +18,9 @@ class WaroengController extends Controller
      */
     public function index()
     {
-        return view('waroeng::index');
+        $waroeng = Waroeng::with(['area'])->get();
+        $no = 1;
+        return view('waroeng::index', compact( 'waroeng','no'));
     }
 
     /**
@@ -23,7 +29,9 @@ class WaroengController extends Controller
      */
     public function create()
     {
-        return view('waroeng::create');
+        $waroeng = Waroeng::get();
+        $area = Area::get();
+        return view('waroeng::create', compact('waroeng', 'area'));
     }
 
     /**
@@ -33,6 +41,16 @@ class WaroengController extends Controller
      */
     public function store(Request $request)
     {
+        $waroeng = new Waroeng();
+        $waroeng->waroeng_nama= $request->nama_waroeng;
+        $waroeng->waroeng_alamat= $request->alamat_waroeng;
+        $waroeng->area_id= $request->area_id;
+        $waroeng->save();
+
+        Session::flash('success', $waroeng->waroeng_nama . ' berhasil ditambahkan!');
+
+        return Redirect::route('waroeng.index');
+
     }
 
     /**
@@ -48,9 +66,11 @@ class WaroengController extends Controller
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('waroeng::edit');
+        $waroeng = Waroeng::find($id);
+        $area = Area::get();
+        return view('waroeng::edit', compact('waroeng', 'area'));
     }
 
     /**
@@ -58,15 +78,28 @@ class WaroengController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+        $waroeng = Waroeng::find($id);
+        $waroeng->waroeng_nama = $request->nama_waroeng;
+        $waroeng->waroeng_alamat = $request->alamat_waroeng;
+        $waroeng->area_id = $request->area_id;
+        $waroeng->save();
+
+        return Redirect::route('waroeng.index');
     }
 
     /**
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+    public function destroy($id)
     {
+        $waroeng = Waroeng::find($id);
+        $waroeng->delete();
+
+        Session::flash('delete', $waroeng->waroeng_nama . ' berhasil dihapus!');
+
+        return Redirect::route('waroeng.index');
     }
 }

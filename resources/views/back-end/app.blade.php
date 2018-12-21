@@ -142,7 +142,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-5">
+                  <div class="col-sm-12">
                       @yield('content')
                   </div>
                 </div>

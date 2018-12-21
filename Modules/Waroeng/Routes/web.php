@@ -13,4 +13,12 @@
 
 Route::prefix('waroeng')->group(function() {
     Route::get('/', 'WaroengController@index')->name('waroeng.index');
+
+    Route::get('/tambah', 'WaroengController@create')->name('tambah.waroeng');
+    Route::post('/store', 'WaroengController@store')->name('simpan.waroeng');
+
+    Route::get('/edit/{waroeng_id}', 'WaroengController@edit')->name('edit.waroeng');
+    Route::put('/update/{waroeng_id}', 'WaroengController@update')->name('update.waroeng');
+
+    Route::delete('/destroy/{waroeng_id}', 'WaroengController@destroy')->name('destroy.waroeng');
 });

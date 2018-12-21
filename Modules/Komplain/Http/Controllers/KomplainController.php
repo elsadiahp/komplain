@@ -45,7 +45,7 @@ class KomplainController extends Controller
      */
     public function store(Request $request)
     {
-        $komplain = new Komplain;
+        $komplain = new Komplain();
 
         $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
@@ -65,7 +65,7 @@ class KomplainController extends Controller
         $komplain->save();
 
         Session::flash('success',' Komplain added successfully');
-        return redirect()->route('komplain.index');
+        return Redirect::route('komplain.index');
     }
 
     /**

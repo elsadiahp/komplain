@@ -7,8 +7,8 @@
                 <form action="{{route('komplain.store')}}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="id_nota">Kategori</label>
-                        <select class="selection form-control" name="id_kategori">
+                        <label for="id_kategori">Kategori</label>
+                        <select class="selection form-control" id="id_kategori" name="id_kategori">
                             <option value="">-</option>
                         @foreach ($data->kategori as $key)
                             <option value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
@@ -16,8 +16,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Id_menu">Waroeng</label>
-                        <select class="selection form-control" name="waroeng_id">
+                        <label for="waroeng_id">Waroeng</label>
+                        <select class="selection form-control" id="waroeng_id" name="waroeng_id">
                             <option value="">-</option>
                         @foreach ($data->waroeng as $key)
                             <option value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="media_komplain">Media Komplain</label>
-                        <input type="text" class="form-control" name="media_komplain">
+                        <input type="text" class="form-control" id="media_komplain" name="media_komplain">
                     </div>
                     <div class="form-group">
                         <label for="isi_komplain">Isi Komplain</label>

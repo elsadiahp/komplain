@@ -15,6 +15,14 @@
                         @endif
                     </span>
                 </div>
+                <td>
+                    <label for="">Waktu</label>
+                    <input type="time" name="waktu" class="form-control">
+                </td>
+                <td>
+                    <label for="">Tanggal</label>
+                    <input type="date" name="tanggal" class="form-control">
+                </td>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add</button>
                 </div>

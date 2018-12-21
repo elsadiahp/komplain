@@ -1,6 +1,8 @@
 @extends('back-end.app')
 
 @section('content')
+    <h1>Area</h1>
+    <br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -13,9 +15,11 @@
                     <strong>Delete! </strong>{{ Session::get('delete')}}
                 </div>                    
             @endif
-            <h1>Area</h1>
+                <br>
             <a href="{{ route('area.create')}}" class="btn btn-primary btn-sm pull-right" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>
-            <table class="table table-bordered">
+                <br>
+                <br>
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th width="10">No</th>
