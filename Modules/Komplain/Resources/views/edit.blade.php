@@ -41,9 +41,13 @@
                         <textarea name="isi_komplain" id="isi_komplain" cols="30" rows="10" class="form-control">{{$data->komplain->isi_komplain}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="tanggal_jam_komplain">Tanggal Waktu Komplain</label>
-                        <input class="form-control" name="tanggal_jam_komplain" type="datetime-local" value="{{$data->komplain->tanggal_jam_komplain}}">
+                        <label for="tanggal_komplain">Tanggal Komplain</label>
+                        <input class="form-control" name="tanggal_komplain" type="date" value="{{$data->komplain->tanggal_komplain}}">
                     </div>
+                    <div class="form-group">
+                        <label for="tanggal_jam_komplain">Waktu Komplain</label>
+                        <input class="form-control" name="waktu_komplain" type="time" value="{{$data->komplain->waktu_komplain}}">
+                        </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>

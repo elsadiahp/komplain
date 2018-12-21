@@ -34,11 +34,11 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_komplain">Tanggal Komplain</label>
-                        <input class="form-control" name="tanggal_komplain" type="date">
+                        <input class="form-control" name="tanggal_komplain" type="date" value="{{date('m/d/Y')}}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal_jam_komplain">Waktu Komplain</label>
-                        <input class="form-control" name="waktu_komplain" type="time">
+                        <input class="form-control" name="waktu_komplain" type="time" value="{{date('H:i')}}">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Create</button>
