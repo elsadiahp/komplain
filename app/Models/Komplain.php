@@ -37,10 +37,10 @@ class Komplain extends Eloquent
 		'id_kategori' => 'int'
 	];
 
-	protected $dates = [
-		'tanggal_komplain',
-		'waktu_komplain'
-	];
+	// protected $dates = [
+	// 	'tanggal_komplain',
+	// 	'waktu_komplain'
+	// ];
 
 	protected $fillable = [
 		'waroeng_id',

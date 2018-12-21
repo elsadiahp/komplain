@@ -41,8 +41,8 @@
                                 <td>{{$key->waroeng->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
-                                {{-- <td>{{$key->tanggal_komplain}}</td> --}}
-                                {{-- <td>{{$key->waktu_komplain}}</td> --}}
+                                <td>{{$key->tanggal_komplain}}</td>
+                                <td>{{$key->waktu_komplain}}</td>
                                 <td>
                                     <a href="{{ route('komplain.edit',['id'=>$key->komplain_id])}}" class="btn btn-success btn-sm">Edit</a>
                                 </td>
