@@ -9,6 +9,7 @@ use App\Models\TbKategori;
 use App\Models\Waroeng;
 use App\Models\Komplain;
 use Session;
+use Redirect;
 use Carbon\Carbon;
 
 class KomplainController extends Controller
