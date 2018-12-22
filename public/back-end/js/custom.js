@@ -1,3 +1,5 @@
-$(document).ready(function() {
-    $('.').select2();
-});
+<script>
+    $(document).ready(function() {
+        $('.detail').select2();
+    });
+</script>

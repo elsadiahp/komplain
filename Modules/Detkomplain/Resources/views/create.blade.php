@@ -26,7 +26,11 @@
                     <div class="form-group">
                         <label for="id_kategori" class="col-md-12 control-label">Nama Kategori </label>
                         <div class="col-md-12">
+
                             <select name="kategori[]" id="kat" class="form-control" required>
+
+                            <select name="id_kategori[]" class="form-control detail" multiple="multiple">
+
                                 <option value="">--Pilih Nama Kategori--</option>
                                 @foreach($kategori as $kat)
                                     <option value="{{$kat->id_kategori}}">{{$kat->nama_kategori}}</option>
@@ -50,9 +54,9 @@
                             </div>
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
+
 
                 {{--<script type="text/javascript">--}}
                     {{--$(document).ready(function() {--}}
@@ -68,6 +72,8 @@
 
                     {{--});--}}
                 {{--</script>--}}
+
+
             </div>
         </div>
     </div>

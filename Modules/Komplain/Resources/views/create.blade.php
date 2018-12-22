@@ -7,6 +7,16 @@
                 <form action="{{route('komplain.store')}}" method="post">
                     @csrf
 
+                    {{-- <div class="form-group">
+                        <label for="id_kategori">Kategori</label>
+                        <select class="selection form-control" id="id_kategori" name="id_kategori">
+                            <option value="">-</option>
+                        @foreach ($data->kategori as $key)
+                            <option value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
+                        @endforeach
+                        </select>
+                    </div> --}}
+
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>
                         <select class="selection form-control" id="waroeng_id" name="waroeng_id">
@@ -26,19 +36,11 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_komplain">Tanggal Komplain</label>
-
-                        <input class="form-control" id="tanggal_komplain" name="tanggal_komplain" type="date">
-                    </div>
-                    <div class="form-group">
-                        <label for="waktu_komplain">Waktu Komplain</label>
-                        <input class="form-control" id="waktu_komplain" name="waktu_komplain" type="time">
-
                         <input class="form-control" name="tanggal_komplain" type="date" value="{{date('m/d/Y')}}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal_jam_komplain">Waktu Komplain</label>
                         <input class="form-control" name="waktu_komplain" type="time" value="{{date('H:i')}}">
-
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Create</button>

@@ -19,7 +19,6 @@
                     <thead>
                         <tr>
                             <th width="10">No</th>
-                            {{--<th>Kategori</th>--}}
                             <th>Waroeng</th>
                             <th>Media Komplain</th>
                             <th>Isi Komplain</th>
@@ -37,8 +36,13 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
+
                                 {{--<td>{{$key->tb_kategori->nama_kategori}}</td>--}}
                                 <td>{{$key->waroeng_nama}}</td>
+
+                                {{-- <td>{{$key->tb_kategori->nama_kategori}}</td> --}}
+                                <td>{{$key->waroeng->waroeng_nama}}</td>
+
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
                                 <td>{{$key->tanggal_komplain}}</td>
@@ -59,6 +63,57 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-md-12">
+                    <div id="chart"></div>
+            </div>
         </div>
     </div>
 @endsection
+
+@section('js')
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+var w = 400;
+var h = 400;
+var r = h/2;
+var aColor = [
+    'rgb(178, 55, 56)',
+    'rgb(213, 69, 70)',
+    
+]
+
+var data = [
+    @foreach($data->komplain2 as $i)
+    {"label":"<?= $i->waroeng->waroeng_nama ?>", "value":<?= $i->total ?>}, 
+    @endforeach
+    ];
+
+
+var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+
+var pie = d3.layout.pie().value(function(d){return d.value;});
+
+// Declare an arc generator function
+var arc = d3.svg.arc().outerRadius(r);
+
+// Select paths, use arc generator to draw
+var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+arcs.append("svg:path")
+    .attr("fill", function(d, i){return aColor[i];})
+    .attr("d", function (d) {return arc(d);})
+;
+
+// Add the text
+arcs.append("svg:text")
+    .attr("transform", function(d){
+        d.innerRadius = 100; /* Distance of label to the center*/
+        d.outerRadius = r;
+        return "translate(" + arc.centroid(d) + ")";}
+    )
+    .attr("text-anchor", "middle")
+    .text( function(d, i) {return data[i].value + '%';})
+;
+</script>
+@endsection
+

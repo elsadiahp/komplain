@@ -7,8 +7,23 @@
                 <form action="{{route('komplain.update', $data->komplain->komplain_id)}}" method="post">
                     @csrf
 
+                    @method('PATCH')
+                    {{-- <div class="form-group">
+                        <label for="kategori_id">Kategori</label>
+                        <select class="selection form-control" name="id_kategori">
+                            <option value="">-</option>
+                        @foreach ($data->kategori as $key)
+                            @if ($key->id_kategori === $data->komplain->id_kategori)
+                                <option selected value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
+                            @else
+                                <option value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
+                            @endif
+                        @endforeach
+                        </select>
+                    </div> --}}
+
                     <div class="form-group">
-                        <label for="kategori_id">Waroeng</label>
+                        <label for="waroeng_id">Waroeng</label>
                         <select class="selection form-control" name="waroeng_id">
                             <option value="">-</option>
                         @foreach ($data->waroeng as $key)
@@ -37,7 +52,7 @@
                         <input class="form-control" name="waktu_komplain" type="time" value="{{$data->komplain->waktu_komplain}}">
                         </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

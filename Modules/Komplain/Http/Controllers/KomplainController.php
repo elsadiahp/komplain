@@ -8,9 +8,11 @@ use Illuminate\Routing\Controller;
 use App\Models\TbKategori;
 use App\Models\Waroeng;
 use App\Models\Komplain;
+use App\Models\KomplainDetail;
 use Session;
 use Redirect;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class KomplainController extends Controller
 {
@@ -21,9 +23,22 @@ class KomplainController extends Controller
     public function index()
     {
         $data = new \stdClass();
+
         $data->komplain = Komplain::with(['waroeng'])->get();
         $no=1;
         return view('komplain::index', compact('data', 'no'));
+
+        $data->komplain = Komplain::with(['waroeng','komplain_details'])->get();
+
+        $data->komplain2 = Komplain::groupBy('waroeng_id')
+            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
+            ->with(['waroeng'])->get();
+        $no=1;
+
+        $data->waroeng = Waroeng::All()->count();
+        
+        return view('komplain::index', compact(['data','no']));
+
     }
 
     /**
@@ -35,6 +50,10 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
+
+        $data->kategori = TbKategori::all();
+        $data->detail_komplain = KomplainDetail::all();
+
         return view('komplain::create', compact('data'));
     }
 
@@ -47,26 +66,15 @@ class KomplainController extends Controller
     {
         $komplain = new Komplain();
 
+
+
+        // $komplain->id_kategori = $request->id_kategori;
+
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
-
-
-        // dd([$request->tanggal_komplain, $request->waktu_komplain]);
-
-
-        // $convert = Carbon::createFromFormat('Y-m-d', $request->tanggal_komplain);
-        // $komplain->tanggal_komplain = $convert->format('Y-m-d');
-        // $komplain->tanggal_komplain = $convert->format('Y-m-d');
-        // $convert2 = Carbon::createFromFormat('H:i', $request->waktu_komplain)->format('H:i:s');
-        // $komplain->waktu_komplain = "$request->waktu_komplain";
-        // $komplain->tanggal_komplain = Carbon::parse($request->tanggal_komplain)->format('Y-m-d');
-        // $komplain->waktu_komplain = Carbon::parse($request->waktu_komplain)->format('H:m:s');
-
-
-
         $komplain->save();
 
         Session::flash('success',' Komplain added successfully');
@@ -91,6 +99,11 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::find($id);
         $data->waroeng = Waroeng::all();
+
+
+        // $data->kategori = TbKategori::all();
+        $data->detail_komplain = KomplainDetail::all();
+
         return view('komplain::edit', compact('data'));
     }
 
@@ -103,10 +116,14 @@ class KomplainController extends Controller
     {
         $komplain = Komplain::find($id);
 
+
+        // $komplain->id_kategori = $request->id_kategori;
+
         $komplain->waroeng_id = $request->waroeng_id;
-        $komplain->media_koplain = $request->media_koplain;
+        $komplain->media_koplain = $request->media_komplain;
 		$komplain->isi_komplain = $request->isi_komplain;
-		$komplain->tanggal_jam_komplain = $request->tanggal_jam_komplain;
+		$komplain->tanggal_komplain = $request->tanggal_komplain;
+        $komplain->waktu_komplain = $request->waktu_komplain;
         $komplain->save();
 
         return redirect()->route('komplain.index');
@@ -122,4 +139,5 @@ class KomplainController extends Controller
         $komplain->delete();
         return redirect()->route('komplain.index');
     }
+    
 }

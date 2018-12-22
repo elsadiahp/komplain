@@ -26,12 +26,16 @@
                 <i class="nav-icon icon-speedometer"></i> Komplain 
               </a>
             </li>
-
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ route('detkomplain.index')}}">
-                      <i class="nav-icon icon-speedometer"></i> Detail Komplain
-                  </a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('laporan.index')}}">
+                <i class="nav-icon icon-speedometer"></i> Laporan 
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('detkomplain.index')}}">
+                  <i class="nav-icon icon-speedometer"></i> Detail Komplain
+                </a>
+            </li>
           </ul>
         </nav>
       </div>
