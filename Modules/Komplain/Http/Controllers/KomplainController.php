@@ -21,9 +21,9 @@ class KomplainController extends Controller
     public function index()
     {
         $data = new \stdClass();
-        $data->komplain = Komplain::with(['tb_kategori','waroeng'])->get();
+        $data->komplain = Komplain::with(['waroeng'])->get();
         $no=1;
-        return view('komplain::index', compact(['data','no']));
+        return view('komplain::index', compact('data', 'no'));
     }
 
     /**
@@ -35,7 +35,6 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
-        $data->kategori = TbKategori::all();
         return view('komplain::create', compact('data'));
     }
 
@@ -48,7 +47,6 @@ class KomplainController extends Controller
     {
         $komplain = new Komplain();
 
-        $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;
@@ -93,7 +91,6 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::find($id);
         $data->waroeng = Waroeng::all();
-        $data->kategori = TbKategori::all();
         return view('komplain::edit', compact('data'));
     }
 
@@ -106,7 +103,6 @@ class KomplainController extends Controller
     {
         $komplain = Komplain::find($id);
 
-        $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_koplain;
 		$komplain->isi_komplain = $request->isi_komplain;

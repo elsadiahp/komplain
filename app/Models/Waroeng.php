@@ -38,7 +38,7 @@ class Waroeng extends Eloquent
 		'area_id'
 	];
 
-	public function komplains()
+	public function komplain()
 	{
 		return $this->hasMany(\App\Models\Komplain::class);
 	}

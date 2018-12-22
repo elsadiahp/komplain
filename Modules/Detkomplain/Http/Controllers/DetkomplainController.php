@@ -3,9 +3,12 @@
 namespace Modules\Detkomplain\Http\Controllers;
 
 use App\Kategori;
+use App\Models\Komplain;
+use App\Models\KomplainDetail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class DetkomplainController extends Controller
 {
@@ -27,8 +30,9 @@ class DetkomplainController extends Controller
      */
     public function create()
     {
+        $komplain = Komplain::get();
         $kategori = Kategori::get();
-        return view('detkomplain::create', compact('kategori'));
+        return view('detkomplain::create', compact('kategori', 'komplain'));
     }
 
     /**
@@ -38,6 +42,18 @@ class DetkomplainController extends Controller
      */
     public function store(Request $request)
     {
+        $detkom = new KomplainDetail();
+        $kat = $request->kategori;
+        $data[] = $kat;
+
+        $detkom->komplain_id = $request->komplain_id;
+        $detkom->komplain_id = $data;
+
+        dump($detkom->komplain_id);
+        exit();
+        $detkom->save();
+
+        return Redirect::route('detkomplain.index');
     }
 
     /**

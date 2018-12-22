@@ -19,7 +19,7 @@
                     <thead>
                         <tr>
                             <th width="10">No</th>
-                            <th>Kategori</th>
+                            {{--<th>Kategori</th>--}}
                             <th>Waroeng</th>
                             <th>Media Komplain</th>
                             <th>Isi Komplain</th>
@@ -37,24 +37,24 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$key->tb_kategori->nama_kategori}}</td>
-                                <td>{{$key->waroeng->waroeng_nama}}</td>
+                                {{--<td>{{$key->tb_kategori->nama_kategori}}</td>--}}
+                                <td>{{$key->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
                                 <td>{{$key->tanggal_komplain}}</td>
                                 <td>{{$key->waktu_komplain}}</td>
                                 <td>
-                                    <a href="{{ route('komplain.edit',['id'=>$key->komplain_id])}}" class="btn btn-success btn-sm">Edit</a>
+{{--                                    <a href="{{ route('komplain.edit', $key->komplain_id)}}" class="btn btn-success btn-sm">Edit</a>--}}
                                 </td>
                                 <td>
-                                    <form action="{{route('komplain.destroy',['id'=>$key->komplain_id])}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                    </form>
+                                    {{--<form action="{{route('komplain.destroy', $key->komplain_id)}}" method="POST">--}}
+                                        {{--@csrf--}}
+                                        {{--@method('DELETE')--}}
+                                        {{--<button class="btn btn-danger btn-sm" type="submit">Delete</button>--}}
+                                    {{--</form>--}}
                                 </td>
                             </tr>
-                        @endforeach   
+                        @endforeach
                     @endif
                     </tbody>
                 </table>
