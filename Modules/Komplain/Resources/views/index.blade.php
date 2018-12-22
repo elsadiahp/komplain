@@ -19,7 +19,7 @@
                     <thead>
                         <tr>
                             <th width="10">No</th>
-                            <th>Kategori</th>
+                            {{-- <th>Kategori</th> --}}
                             <th>Waroeng</th>
                             <th>Media Komplain</th>
                             <th>Isi Komplain</th>
@@ -37,7 +37,7 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$key->tb_kategori->nama_kategori}}</td>
+                                {{-- <td>{{$key->tb_kategori->nama_kategori}}</td> --}}
                                 <td>{{$key->waroeng->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>

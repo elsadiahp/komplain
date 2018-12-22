@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <form action="{{route('komplain.store')}}" method="post">
                     @csrf
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="id_kategori">Kategori</label>
                         <select class="selection form-control" id="id_kategori" name="id_kategori">
                             <option value="">-</option>
@@ -14,7 +14,7 @@
                             <option value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
                         @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>
                         <select class="selection form-control" id="waroeng_id" name="waroeng_id">

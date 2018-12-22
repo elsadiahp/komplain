@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 21 Dec 2018 09:53:57 +0000.
+ * Date: Sat, 22 Dec 2018 02:28:50 +0000.
  */
 
 namespace App\Models;
@@ -19,6 +19,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\Area $area
  * @property \Illuminate\Database\Eloquent\Collection $komplains
  *
  * @package App\Models
@@ -37,6 +38,11 @@ class Waroeng extends Eloquent
 		'waroeng_alamat',
 		'area_id'
 	];
+
+	public function area()
+	{
+		return $this->belongsTo(\App\Models\Area::class);
+	}
 
 	public function komplains()
 	{

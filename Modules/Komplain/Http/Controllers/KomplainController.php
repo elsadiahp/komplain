@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use App\Models\TbKategori;
 use App\Models\Waroeng;
 use App\Models\Komplain;
+use App\Models\KomplainDetail;
 use Session;
 use Redirect;
 use Carbon\Carbon;
@@ -22,10 +23,11 @@ class KomplainController extends Controller
     public function index()
     {
         $data = new \stdClass();
-        $data->komplain = Komplain::with(['waroeng','tb_kategori'])->get();
-                    $data->komplain2 = Komplain::groupBy('waroeng_id')
-                    ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
-                    ->with(['waroeng'])->get();
+        $data->komplain = Komplain::with(['waroeng','komplain_details'])->get();
+
+        $data->komplain2 = Komplain::groupBy('waroeng_id')
+            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
+            ->with(['waroeng'])->get();
         $no=1;
 
         $data->waroeng = Waroeng::All()->count();
@@ -43,6 +45,7 @@ class KomplainController extends Controller
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
         $data->kategori = TbKategori::all();
+        $data->detail_komplain = KomplainDetail::all();
         return view('komplain::create', compact('data'));
     }
 
@@ -55,7 +58,7 @@ class KomplainController extends Controller
     {
         $komplain = new Komplain();
 
-        $komplain->id_kategori = $request->id_kategori;
+        // $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;
@@ -85,7 +88,8 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::find($id);
         $data->waroeng = Waroeng::all();
-        $data->kategori = TbKategori::all();
+        // $data->kategori = TbKategori::all();
+        $data->detail_komplain = KomplainDetail::all();
         return view('komplain::edit', compact('data'));
     }
 
@@ -98,11 +102,12 @@ class KomplainController extends Controller
     {
         $komplain = Komplain::find($id);
 
-        $komplain->id_kategori = $request->id_kategori;
+        // $komplain->id_kategori = $request->id_kategori;
         $komplain->waroeng_id = $request->waroeng_id;
-        $komplain->media_koplain = $request->media_koplain;
+        $komplain->media_koplain = $request->media_komplain;
 		$komplain->isi_komplain = $request->isi_komplain;
-		$komplain->tanggal_jam_komplain = $request->tanggal_jam_komplain;
+		$komplain->tanggal_komplain = $request->tanggal_komplain;
+        $komplain->waktu_komplain = $request->waktu_komplain;
         $komplain->save();
 
         return redirect()->route('komplain.index');

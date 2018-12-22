@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <form action="{{route('komplain.update', $data->komplain->komplain_id)}}" method="post">
                     @csrf
-                    <div class="form-group">
+                    @method('PATCH')
+                    {{-- <div class="form-group">
                         <label for="kategori_id">Kategori</label>
                         <select class="selection form-control" name="id_kategori">
                             <option value="">-</option>
@@ -18,9 +19,9 @@
                             @endif
                         @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group">
-                        <label for="kategori_id">Waroeng</label>
+                        <label for="waroeng_id">Waroeng</label>
                         <select class="selection form-control" name="waroeng_id">
                             <option value="">-</option>
                         @foreach ($data->waroeng as $key)
@@ -49,7 +50,7 @@
                         <input class="form-control" name="waktu_komplain" type="time" value="{{$data->komplain->waktu_komplain}}">
                         </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

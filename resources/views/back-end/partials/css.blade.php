@@ -6,7 +6,11 @@
 <!-- Main styles for this application-->
 <link href="{{ asset('back-end/css/style.css')}}" rel="stylesheet">
 <link href="{{ asset('vendors/pace-progress/css/pace.min.css')}}" rel="stylesheet">
+
+{{-- select2() --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+<link href="path/to/select2.min.css" rel="stylesheet" />
+
 <!-- Global site tag (gtag.js) - Google Analytics-->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
 <script>
