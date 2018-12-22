@@ -9,6 +9,7 @@ use App\Models\TbKategori;
 use App\Models\Waroeng;
 use App\Models\Komplain;
 use Session;
+use Redirect;
 use Carbon\Carbon;
 
 class KomplainController extends Controller
@@ -54,14 +55,20 @@ class KomplainController extends Controller
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
 
+
         // dd([$request->tanggal_komplain, $request->waktu_komplain]);
 
-        // $tanggal = str_replace("-", "", $request->tanggal_komplain);
-        // $waktu = str_replace(":", "", $request->waktu_komplain);
-        // $komplain->tanggal_komplain = Carbon::parse($tanggal)->format('Y-m-d');
-        // $komplain->waktu_komplain = Carbon::parse($waktu)->format('H:m:s');
 
-//        dd($utgl);
+        // $convert = Carbon::createFromFormat('Y-m-d', $request->tanggal_komplain);
+        // $komplain->tanggal_komplain = $convert->format('Y-m-d');
+        // $komplain->tanggal_komplain = $convert->format('Y-m-d');
+        // $convert2 = Carbon::createFromFormat('H:i', $request->waktu_komplain)->format('H:i:s');
+        // $komplain->waktu_komplain = "$request->waktu_komplain";
+        // $komplain->tanggal_komplain = Carbon::parse($request->tanggal_komplain)->format('Y-m-d');
+        // $komplain->waktu_komplain = Carbon::parse($request->waktu_komplain)->format('H:m:s');
+
+
+
         $komplain->save();
 
         Session::flash('success',' Komplain added successfully');
@@ -113,7 +120,7 @@ class KomplainController extends Controller
      * Remove the specified resource from storage.
      * @return Response
      */
-    public function destroy()
+    public function destroy($id)
     {
         $komplain = Komplain::find($id);
         $komplain->delete();
