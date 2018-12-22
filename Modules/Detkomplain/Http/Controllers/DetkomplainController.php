@@ -2,6 +2,7 @@
 
 namespace Modules\Detkomplain\Http\Controllers;
 
+use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -26,7 +27,8 @@ class DetkomplainController extends Controller
      */
     public function create()
     {
-        return view('detkomplain::create');
+        $kategori = Kategori::get();
+        return view('detkomplain::create', compact('kategori'));
     }
 
     /**
