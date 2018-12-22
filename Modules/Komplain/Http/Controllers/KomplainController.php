@@ -9,6 +9,7 @@ use App\Models\TbKategori;
 use App\Models\Waroeng;
 use App\Models\Komplain;
 use Session;
+use Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -60,7 +61,6 @@ class KomplainController extends Controller
         $komplain->isi_komplain = $request->isi_komplain;
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
-
         $komplain->save();
 
         Session::flash('success',' Komplain added successfully');

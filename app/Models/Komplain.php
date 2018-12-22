@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 20 Dec 2018 08:47:27 +0000.
+ * Date: Fri, 21 Dec 2018 09:53:57 +0000.
  */
 
 namespace App\Models;
@@ -14,7 +14,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $komplain_id
  * @property int $waroeng_id
- * @property int $id_kategori
  * @property string $media_koplain
  * @property string $isi_komplain
  * @property \Carbon\Carbon $tanggal_komplain
@@ -22,8 +21,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
- * @property \App\Models\TbKategori $tb_kategori
  * @property \App\Models\Waroeng $waroeng
+ * @property \Illuminate\Database\Eloquent\Collection $komplain_details
  *
  * @package App\Models
  */
@@ -33,31 +32,29 @@ class Komplain extends Eloquent
 	protected $primaryKey = 'komplain_id';
 
 	protected $casts = [
-		'waroeng_id' => 'int',
-		'id_kategori' => 'int'
+		'waroeng_id' => 'int'
 	];
 
-	// protected $dates = [
-	// 	'tanggal_komplain',
-	// 	'waktu_komplain'
-	// ];
+	protected $dates = [
+		'tanggal_komplain',
+		'waktu_komplain'
+	];
 
 	protected $fillable = [
 		'waroeng_id',
-		'id_kategori',
 		'media_koplain',
 		'isi_komplain',
 		'tanggal_komplain',
 		'waktu_komplain'
 	];
 
-	public function tb_kategori()
-	{
-		return $this->belongsTo(\App\Models\TbKategori::class, 'id_kategori');
-	}
-
 	public function waroeng()
 	{
-		return $this->belongsTo(\App\Models\Waroeng::class,'waroeng_id');
+		return $this->belongsTo(\App\Models\Waroeng::class);
+	}
+
+	public function komplain_details()
+	{
+		return $this->hasMany(\App\Models\KomplainDetail::class);
 	}
 }
