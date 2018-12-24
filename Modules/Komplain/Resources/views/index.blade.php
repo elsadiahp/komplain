@@ -19,8 +19,19 @@
                 <table class="table table-striped">
                     <thead>
 
+                    {{--<tr>--}}
+                    {{--<th width="10">No</th>--}}
+                    {{--<th>Waroeng</th>--}}
+                    {{--<th>Media Komplain</th>--}}
+                    {{--<th>Isi Komplain</th>--}}
+                    {{--<th>Tanggal Komplain</th>--}}
+                    {{--<th>Waktu Komplain</th>--}}
+                    {{--<th colspan="2" style="text-align:center;">Action</th>--}}
+                    {{--</tr>--}}
+
                     <tr>
                         <th width="10">No</th>
+                        <th>Kategori</th>
                         <th>Waroeng</th>
                         <th>Media Komplain</th>
                         <th>Isi Komplain</th>
@@ -28,17 +39,6 @@
                         <th>Waktu Komplain</th>
                         <th colspan="2" style="text-align:center;">Action</th>
                     </tr>
-
-                        <tr>
-                            <th width="10">No</th>
-                            <th>Kategori</th>
-                            <th>Waroeng</th>
-                            <th>Media Komplain</th>
-                            <th>Isi Komplain</th>
-                            <th>Tanggal Komplain</th>
-                            <th>Waktu Komplain</th>
-                            <th colspan="2" style="text-align:center;">Action</th>
-                        </tr>
 
                     </thead>
                     <tbody>
@@ -50,20 +50,17 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
-
-
                                 <td>
-                                @foreach ($data->detail_komplain as $detail_komplain)
-                                    @if ($detail_komplain->komplain_id === $key->komplain_id)
-
-                                        @foreach ($data->kategori as $kategori)
-                                            @if ($kategori->id_kategori === $detail_komplain->id_kategori)
-                                                <span class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
-                                            @endif
-                                        @endforeach
+                                    @foreach ($data->detail_komplain as $detail_komplain)
+                                        @if ($detail_komplain->komplain_id === $key->komplain_id)
+                                            @foreach ($data->kategori as $kategori)
+                                                @if ($kategori->id_kategori === $detail_komplain->id_kategori)
+                                                    <span class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
+                                                @endif
+                                            @endforeach
                                         @endif
-                                @endforeach
-
+                                    @endforeach
+                                </td>
                                 <td>{{$key->waroeng->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
@@ -93,14 +90,16 @@
 
             {{--<a href="{{route('komplain.chart')}}" class="btn btn-primary">Chart</a>--}}
 
-            {{ $data->komplain->links() }}
+            {{--{{ $data->komplain->links() }}--}}
 
             <div class="col-md-12">
-            <div class="col-md-4">
-                <div id="chartWaroeng" style="height: 370px; width: 100%;" url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>
-            </div>
                 <div class="col-md-4">
-                    <div id="chartArea" style="height: 370px; width: 100%;" url="{{route('komplain.chart', ['a'=>'area_id'])}}" title="Area"></div>
+                    <div id="chartWaroeng" style="height: 370px; width: 100%;"
+                         url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>
+                </div>
+                <div class="col-md-4">
+                    <div id="chartArea" style="height: 370px; width: 100%;"
+                         url="{{route('komplain.chart', ['b'=>'area_id'])}}" title="Area"></div>
                 </div>
                 <div class="col-md-4">
                     <div id="chartKategori" style="height: 370px; width: 100%;"></div>
@@ -116,14 +115,52 @@
         $(function () {
             G9Chart("#chartWaroeng")
         });
-        function G9Chart(id){
-            $id = $(id);
-            $.getJSON($id.attr('url'), function (data) {
+
+        function G9Chart(id) {
+            $id1 = $(id);
+            $.getJSON($id1.attr('url'), function (data) {
                 var items = [];
                 $.each(data, function (d, i) {
                     items.push({
                         y: i.value,
                         name: i.waroeng.waroeng_nama
+                    });
+                });
+                $id1.CanvasJSChart({
+                    exportEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: $id1.attr('title')
+                    },
+                    legend: {
+                        horizontalAlign: "right",
+                        verticalAlign: "center"
+                    },
+                    data: [{
+                        type: "pie",
+                        showInLegend: true,
+                        toolTipContent: "<b>{name}</b>: ${y} (#percent%)",
+                        indexLabel: "{name}",
+                        legendText: "{name} (#percent%)",
+                        indexLabelPlacement: "inside",
+                        dataPoints: items
+                    }]
+                });
+            })
+        }
+
+        $(function () {
+            G9Chart1("#chartArea")
+        });
+
+        function G9Chart1(id) {
+            $id = $(id);
+            $.getJSON($id.attr('url'), function (area) {
+                var items1 = [];
+                $.each(area, function (d, i) {
+                    items1.push({
+                        y: i.value,
+                        name: i.waroeng.area_id
                     });
                 });
                 $id.CanvasJSChart({
@@ -151,41 +188,41 @@
     </script>
 
     {{--<script type="text/javascript">--}}
-        {{--$(function () {--}}
-            {{--G9Chart("#chartArea")--}}
-        {{--});--}}
-        {{--function G9Chart(id){--}}
-            {{--$id = $(id);--}}
-            {{--$.getJSON($id.attr('url'), function (data) {--}}
-                {{--var items = [];--}}
-                {{--$.each(data, function (d, i) {--}}
-                    {{--items.push({--}}
-                        {{--y: i.value,--}}
-                        {{--name: i.waroeng.area_id--}}
-                    {{--});--}}
-                {{--});--}}
-                {{--$id.CanvasJSChart({--}}
-                    {{--exportEnabled: true,--}}
-                    {{--animationEnabled: true,--}}
-                    {{--title: {--}}
-                        {{--text: $id.attr('title')--}}
-                    {{--},--}}
-                    {{--legend: {--}}
-                        {{--horizontalAlign: "right",--}}
-                        {{--verticalAlign: "center"--}}
-                    {{--},--}}
-                    {{--data: [{--}}
-                        {{--type: "pie",--}}
-                        {{--showInLegend: true,--}}
-                        {{--toolTipContent: "<b>{name}</b>: ${y} (#percent%)",--}}
-                        {{--indexLabel: "{name}",--}}
-                        {{--legendText: "{name} (#percent%)",--}}
-                        {{--indexLabelPlacement: "inside",--}}
-                        {{--dataPoints: items--}}
-                    {{--}]--}}
-                {{--});--}}
-            {{--})--}}
-        {{--}--}}
+    {{--$(function () {--}}
+    {{--G9Chart("#chartArea")--}}
+    {{--});--}}
+    {{--function G9Chart(id){--}}
+    {{--$id = $(id);--}}
+    {{--$.getJSON($id.attr('url'), function (data) {--}}
+    {{--var items = [];--}}
+    {{--$.each(data, function (d, m) {--}}
+    {{--items.push({--}}
+    {{--y: m.value,--}}
+    {{--name:m.area.area_id--}}
+    {{--});--}}
+    {{--});--}}
+    {{--$id.CanvasJSChart({--}}
+    {{--exportEnabled: true,--}}
+    {{--animationEnabled: true,--}}
+    {{--title: {--}}
+    {{--text: $id.attr('title')--}}
+    {{--},--}}
+    {{--legend: {--}}
+    {{--horizontalAlign: "right",--}}
+    {{--verticalAlign: "center"--}}
+    {{--},--}}
+    {{--data: [{--}}
+    {{--type: "pie",--}}
+    {{--showInLegend: true,--}}
+    {{--toolTipContent: "<b>{name}</b>: ${y} (#percent%)",--}}
+    {{--indexLabel: "{name}",--}}
+    {{--legendText: "{name} (#percent%)",--}}
+    {{--indexLabelPlacement: "inside",--}}
+    {{--dataPoints: items--}}
+    {{--}]--}}
+    {{--});--}}
+    {{--})--}}
+    {{--}--}}
     {{--</script>--}}
 
 @endsection

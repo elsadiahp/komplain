@@ -2,6 +2,7 @@
 
 namespace Modules\Laporan\Http\Controllers;
 
+//use ConsoleTVs\Charts\Facades\Charts;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -20,15 +21,23 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $komplain = Komplain::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
-    				->get();
-        $chart = Charts::database($komplain, 'bar', 'highcharts')
-			      ->title("Monthly new Register Users")
-			      ->elementLabel("Total Users")
-			      ->dimensions(1000, 500)
-			      ->responsive(false)
-			      ->groupByMonth(date('Y'), true);
-        return view('laporan::index',compact('chart'));
+        $chart = Charts::multi('bar', 'material')
+            ->title("My Cool Chart")
+            ->dimensions(0, 400)
+            ->template("material")
+            ->dataset('Element 1' , [5, 20, 100])
+            ->dataset('Element 2' , [51, 30, 80])
+            ->dataset('Element 3' , [25, 10, 40])
+            ->labels(['One', 'Two', 'Three']);
+//        $komplain = Komplain::where(DB::raw("(DATE_FORMAT(created_at,'%Y'))"),date('Y'))
+//    				->get();
+//        $chart = Charts::database($komplain, 'bar', 'highcharts')
+//			      ->title("Monthly new Register Users")
+//			      ->elementLabel("Total Users")
+//			      ->dimensions(1000, 500)
+//			      ->responsive(false)
+//			      ->groupByMonth(date('Y'), true);
+        return view('laporan::index', ['chart' => $chart]);
     }
 
     /**

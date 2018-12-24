@@ -2,6 +2,7 @@
 
 namespace Modules\Komplain\Http\Controllers;
 
+use App\Models\Area;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -20,11 +21,10 @@ class KomplainController extends Controller
     {
         $data = new \stdClass();
 
-        $data->komplain = Komplain::with(['waroeng','komplain_details'])->orderby('komplain_id','asc')->paginate(10);
+        $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->orderBy('komplain_id', 'asc')->get();
         $data->waroeng = Waroeng::All()->count();
-        $data->detail_komplain = KomplainDetail::with(['tb_kategori','komplain'])->get();
+        $data->detail_komplain = KomplainDetail::with(['tb_kategori', 'komplain'])->get();
         $data->kategori = TbKategori::All();
-
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
 
@@ -38,9 +38,6 @@ class KomplainController extends Controller
 
         $no = 1;
 
-
-        $data->waroeng = Waroeng::All()->count();
-
         return view('komplain::index', compact('data', 'no'));
 
     }
@@ -48,15 +45,6 @@ class KomplainController extends Controller
     public function chart(Request $request)
     {
         if ($request->p) {
-//            return $data = DB::table('komplain as k')
-//                ->join('waroeng as w','w.waroeng_id','=','k.waroeng_id')
-//                ->select('k.waroeng_id',DB::raw('count(k.'.$request->p.') as value'))
-//                ->groupBy('k.waroeng_id')
-//                ->get();
-
-//                ->join('area as a','a.area_id','=','w.area_id')
-//                ->groupBy('k.'.$request->p)
-//                ->select('k.'.$request->p,(DB::raw('count(k.'.$request->p.') as value')))
 
             if ($request->m) {
 
@@ -66,26 +54,26 @@ class KomplainController extends Controller
             }
             $data->with(['waroeng'])
                  ->select($request->p, DB::raw('count(' . $request->p . ') as value'));
-
-            if ($request->a){
-                $data = Komplain::where('area_id', 'like', '%%' .$request->a.'%%')->groupBy($request->p);
-            } else {
-                $data = Komplain::groupBy($request->p);
-            }
-            $data->with(['waroeng'])
-                ->select($request->p, DB::raw('count(' . $request->p . ') as value'));
             return $data->get();
         }
+
+        if ($request->area_id){
+            $area = Komplain::groupBy('area_id')->select('area_id', DB::raw('count(*) as total'));
+            return $area->get();
+        }
+//        if ($request->a) {
+//            if ($request->b) {
+//                $area = Komplain::where('area_id', 'like', '%%' .$request->b . '%%')->groupBy($request->a);
+//            } else {
+//                $area = Komplain::groupBy($request->a);
+//            }
+//            $area->with(['waroeng'])
+//                ->select($request->a, DB::raw('count('. $request->a.') as value'));
+//            return $area->get();
+//        }
+
         return 500;
-
-
-        return view('komplain::index', compact(['data','no']));
     }
-    
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
 
     public function create()
     {
@@ -101,13 +89,6 @@ class KomplainController extends Controller
     {
         $komplain = new Komplain();
 
-
-
-        // $komplain->id_kategori = $request->id_kategori;
-
-
-        
-
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;
@@ -116,22 +97,16 @@ class KomplainController extends Controller
         // dd($komplain);
         $komplain->save();
 
+        $tag = $request->id_kategori;
+        foreach($tag as $tags){
+            $detail_komplain = new KomplainDetail();
+            $detail_komplain->komplain_id = $komplain->komplain_id;
+            $detail_komplain->id_kategori =$tags;
+            // dd($detail_komplain);
+            $detail_komplain->save();
+        }
 
         Session::flash('success', ' Komplain added successfully');
-
-            $tag = $request->id_kategori;
-            foreach($tag as $tags){
-                $detail_komplain = new KomplainDetail();
-                $detail_komplain->komplain_id = $komplain->komplain_id;
-                $detail_komplain->id_kategori =$tags;
-                // dd($detail_komplain);
-                $detail_komplain->save();
-            }
-        
-
-
-        Session::flash('success',' Komplain added successfully');
-
         return Redirect::route('komplain.index');
     }
 
@@ -149,27 +124,15 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::find($id);
         $data->waroeng = Waroeng::all();
-
-
-
-        // $data->kategori = TbKategori::all();
-        $data->detail_komplain = KomplainDetail::all();
-
-
         $data->kategori = TbKategori::all();
         $data->detail_komplain = KomplainDetail::where('komplain_id', $id)->get();
-
         return view('komplain::edit', compact('data'));
+
     }
 
     public function update(Request $request, $id)
     {
         $komplain = Komplain::find($id);
-
-
-
-        // $komplain->id_kategori = $request->id_kategori;
-
 
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
@@ -184,9 +147,9 @@ class KomplainController extends Controller
             foreach ($request->id_kategori as $k) {
                 $detail = KomplainDetail::where([
                     ['komplain_id',$id],
-                ['id_kategori',$k]
+                    ['id_kategori',$k]
                 ])->get();
-                
+
                 if ($detail){
                     $d = new KomplainDetail;
                     $d->id_kategori = $k;
@@ -195,6 +158,7 @@ class KomplainController extends Controller
                 }
             }
         }
+
         return redirect()->route('komplain.index');
     }
 
