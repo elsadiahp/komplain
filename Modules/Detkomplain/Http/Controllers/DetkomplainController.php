@@ -43,7 +43,7 @@ class DetkomplainController extends Controller
     public function store(Request $request)
     {
         $detkom = new KomplainDetail();
-        $kat = $request->kategori;
+        $kat = $request->id_kategori;
         $data[] = $kat;
 
         $detkom->komplain_id = $request->komplain_id;

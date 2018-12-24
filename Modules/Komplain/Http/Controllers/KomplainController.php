@@ -16,56 +16,75 @@ use Illuminate\Support\Facades\DB;
 
 class KomplainController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Response
-     */
     public function index()
     {
         $data = new \stdClass();
 
-        $data->komplain = Komplain::with(['waroeng'])->get();
-        $no=1;
-        return view('komplain::index', compact('data', 'no'));
+        $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
 
-        $data->komplain = Komplain::with(['waroeng','komplain_details'])->get();
+//        $data->chartwaroeng = Komplain::groupBy('waroeng_id')
+//            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
+//            ->with(['waroeng'])->get();
 
-        $data->komplain2 = Komplain::groupBy('waroeng_id')
-            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
-            ->with(['waroeng'])->get();
-        $no=1;
+//        $data->chartarea = Komplain::groupBy('area_id')
+//            ->select('area_id' , DB::raw('count(area_id) as total'))
+//            ->with(['waroeng'])->get();
+
+        $no = 1;
 
         $data->waroeng = Waroeng::All()->count();
-        
-        return view('komplain::index', compact(['data','no']));
+
+        return view('komplain::index', compact('data', 'no'));
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
+    public function chart(Request $request)
+    {
+        if ($request->p) {
+//            return $data = DB::table('komplain as k')
+//                ->join('waroeng as w','w.waroeng_id','=','k.waroeng_id')
+//                ->select('k.waroeng_id',DB::raw('count(k.'.$request->p.') as value'))
+//                ->groupBy('k.waroeng_id')
+//                ->get();
+
+//                ->join('area as a','a.area_id','=','w.area_id')
+//                ->groupBy('k.'.$request->p)
+//                ->select('k.'.$request->p,(DB::raw('count(k.'.$request->p.') as value')))
+
+            if ($request->m) {
+
+                $data = Komplain::where('tanggal_komplain', 'like', '%%' . $request->m . '%%')->groupBy($request->p);
+            } else {
+                $data = Komplain::groupBy($request->p);
+            }
+            $data->with(['waroeng'])
+                 ->select($request->p, DB::raw('count(' . $request->p . ') as value'));
+
+            if ($request->a){
+                $data = Komplain::where('area_id', 'like', '%%' .$request->a.'%%')->groupBy($request->p);
+            } else {
+                $data = Komplain::groupBy($request->p);
+            }
+            $data->with(['waroeng'])
+                ->select($request->p, DB::raw('count(' . $request->p . ') as value'));
+            return $data->get();
+        }
+        return 500;
+    }
+
     public function create()
     {
         $data = new \stdClass();
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
-
         $data->kategori = TbKategori::all();
         $data->detail_komplain = KomplainDetail::all();
-
         return view('komplain::create', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         $komplain = new Komplain();
-
 
 
         // $komplain->id_kategori = $request->id_kategori;
@@ -77,14 +96,10 @@ class KomplainController extends Controller
         $komplain->waktu_komplain = $request->waktu_komplain;
         $komplain->save();
 
-        Session::flash('success',' Komplain added successfully');
+        Session::flash('success', ' Komplain added successfully');
         return Redirect::route('komplain.index');
     }
 
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
     public function show()
     {
         return view('komplain::show');
@@ -107,11 +122,6 @@ class KomplainController extends Controller
         return view('komplain::edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function update(Request $request, $id)
     {
         $komplain = Komplain::find($id);
@@ -121,8 +131,8 @@ class KomplainController extends Controller
 
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
-		$komplain->isi_komplain = $request->isi_komplain;
-		$komplain->tanggal_komplain = $request->tanggal_komplain;
+        $komplain->isi_komplain = $request->isi_komplain;
+        $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
         $komplain->save();
 
@@ -139,5 +149,5 @@ class KomplainController extends Controller
         $komplain->delete();
         return redirect()->route('komplain.index');
     }
-    
+
 }

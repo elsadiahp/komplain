@@ -18,4 +18,5 @@ Route::prefix('komplain')->group(function() {
     Route::get('/edit/{id}', 'KomplainController@edit')->name('komplain.edit');
     Route::patch('/update/{id}', 'KomplainController@update')->name('komplain.update');
     Route::delete('/delete/{id}', 'KomplainController@destroy')->name('komplain.destroy');
+    Route::get('/chart/', 'KomplainController@chart')->name('komplain.chart');
 });
