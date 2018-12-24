@@ -18,6 +18,7 @@
                         class="glyphicon glyphicon-plus"> Tambah</span></a>
                 <table class="table table-striped">
                     <thead>
+
                     <tr>
                         <th width="10">No</th>
                         <th>Waroeng</th>
@@ -27,6 +28,18 @@
                         <th>Waktu Komplain</th>
                         <th colspan="2" style="text-align:center;">Action</th>
                     </tr>
+
+                        <tr>
+                            <th width="10">No</th>
+                            <th>Kategori</th>
+                            <th>Waroeng</th>
+                            <th>Media Komplain</th>
+                            <th>Isi Komplain</th>
+                            <th>Tanggal Komplain</th>
+                            <th>Waktu Komplain</th>
+                            <th colspan="2" style="text-align:center;">Action</th>
+                        </tr>
+
                     </thead>
                     <tbody>
                     @if (count($data->komplain)==0)
@@ -37,6 +50,20 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
+
+
+                                <td>
+                                @foreach ($data->detail_komplain as $detail_komplain)
+                                    @if ($detail_komplain->komplain_id === $key->komplain_id)
+
+                                        @foreach ($data->kategori as $kategori)
+                                            @if ($kategori->id_kategori === $detail_komplain->id_kategori)
+                                                <span class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
+                                            @endif
+                                        @endforeach
+                                        @endif
+                                @endforeach
+
                                 <td>{{$key->waroeng->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
@@ -63,7 +90,11 @@
                 <hr>
 
             </div>
+
             {{--<a href="{{route('komplain.chart')}}" class="btn btn-primary">Chart</a>--}}
+
+            {{ $data->komplain->links() }}
+
             <div class="col-md-12">
             <div class="col-md-4">
                 <div id="chartWaroeng" style="height: 370px; width: 100%;" url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>

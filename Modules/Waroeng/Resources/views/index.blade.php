@@ -38,12 +38,12 @@
                 <td>{{$waroeng->waroeng_nama}}</td>
                 <td>{{$waroeng->waroeng_alamat}}</td>
                 <td>{{$waroeng->area->area_nama}}</td>
-                <td align="right"><a href="{{route('edit.waroeng', $waroeng->waroeng_id)}}" class="btn btn-warning">Edit</a></td>
+                <td align="right"><a href="{{route('edit.waroeng', $waroeng->waroeng_id)}}" class="btn btn-success btn-sm">Edit</a></td>
                 <td align="left">
                     <form action="{{route('destroy.waroeng', $waroeng->waroeng_id)}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
                 </td>
             </tr>

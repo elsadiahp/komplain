@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Dec 2018 02:28:50 +0000.
+ * Date: Sat, 22 Dec 2018 07:50:13 +0000.
  */
 
 namespace App\Models;
@@ -41,10 +41,11 @@ class KomplainDetail extends Eloquent
 	public function tb_kategori()
 	{
 		return $this->belongsTo(\App\Models\TbKategori::class, 'id_kategori');
+		// return $this->hasMany(\App\Models\TbKategori::class, 'id_kategori');
 	}
 
 	public function komplain()
 	{
-		return $this->belongsTo(\App\Models\Komplain::class);
+		return $this->belongsTo(\App\Models\Komplain::class, 'komplain_id');
 	}
 }

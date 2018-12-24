@@ -7,6 +7,9 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Charts;
 use App\Models\Komplain;
+use App\Models\Waroeng;
+use App\Models\KomplainDetail;
+use App\Models\TbKategori;
 use DB;
 
 class LaporanController extends Controller

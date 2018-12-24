@@ -7,6 +7,7 @@
                 <form action="{{route('komplain.update', $data->komplain->komplain_id)}}" method="post">
                     @csrf
 
+
                     @method('PATCH')
                     {{-- <div class="form-group">
                         <label for="kategori_id">Kategori</label>
@@ -21,6 +22,16 @@
                         @endforeach
                         </select>
                     </div> --}}
+
+
+                    <div class="form-group">
+                        <label for="id_kategori">Nama Kategori </label>
+                        <select id="kategori" name="id_kategori[]" class="form-control detail" multiple="multiple">
+                            @foreach ($data->kategori as $kategori)
+                                    <option value="{{$kategori->id_kategori}}">{{$kategori->nama_kategori}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>
@@ -58,4 +69,17 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+<script>
+    $(function(){
+        $('#kategori').val([
+            
+            
+       @foreach($data->detail_komplain as $d)
+       {{$d->id_kategori}},
+       @endforeach
+       ]).trigger('change');
+    });
+    </script>
 @endsection

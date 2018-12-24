@@ -13,5 +13,5 @@
 
 Route::prefix('laporan')->group(function() {
     Route::get('/', 'LaporanController@index')->name('laporan.index');
-    Route::get('/chart', 'LaporanController@chart')->name('laporan.chart');
+    // Route::get('/chart', 'LaporanController@chart')->name('laporan.chart');
 });
