@@ -6,6 +6,8 @@ use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use App\Models\KomplainDetail;
+use Session;
 
 class DetkomplainController extends Controller
 {
@@ -15,10 +17,10 @@ class DetkomplainController extends Controller
      */
     public function index()
     {
-        $dkom = new \stdClass();
-//        $dkom->detkom = DetkomplainController::all();
+        $data = new \stdClass();
+        $data->detkom = KomplainDetail::all();
         $no = 1;
-        return view('detkomplain::index', compact('dkom', 'no'));
+        return view('detkomplain::index', compact('data', 'no'));
     }
 
     /**

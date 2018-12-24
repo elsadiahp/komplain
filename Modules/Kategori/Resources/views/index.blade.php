@@ -31,12 +31,12 @@
                     <tr>
                         <td>{{$no++}}</td>
                         <td>{{$kat->nama_kategori}}</td>
-                        <td align="right"><a href="{{route('edit.kategori', $kat->id_kategori)}}" class="btn btn-warning">Edit</a></td>
+                        <td align="right"><a href="{{route('edit.kategori', $kat->id_kategori)}}" class="btn btn-success btn-sm">Edit</a></td>
                         <td align="left">
                             <form action="{{route('destroy.kategori', $kat->id_kategori)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                             </form>
                         </td>
                     </tr>

@@ -18,7 +18,7 @@
     <br>
     <div class="row ">
         <div class="col-md-12">
-            <table class="table table-striped" width="1200px">
+            <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>No</th>
@@ -27,20 +27,28 @@
                 </tr>
                 </thead>
                 <tbody>
-{{--                @foreach($kat->kat as $kat)--}}
-                    <tr>
-                        <td>{{$no++}}</td>
-                        {{--<td>{{$kat->nama_kategori}}</td>--}}
-                        {{--<td align="right"><a href="{{route('edit.kategori', $kat->id_kategori)}}" class="btn btn-warning">Edit</a></td>--}}
-                        {{--<td align="left">--}}
-                            {{--<form action="{{route('destroy.kategori', $kat->id_kategori)}}" method="POST">--}}
-                                {{--@csrf--}}
-                                {{--@method('DELETE')--}}
-                                {{--<button type="submit" class="btn btn-danger">Hapus</button>--}}
-                            {{--</form>--}}
-                        {{--</td>--}}
-                    </tr>
-                {{--@endforeach--}}
+                    @if (count($data->detkom) == 0)
+                        <tr>
+                            <td colspan="4" class="text-center">Tidak Ada Data Area</td>
+                        </tr>
+                    @else
+                        @foreach ($data->detkom as $key)
+                            <tr>
+                                <td>{{$no++}}</td>
+                                {{-- <td>{{$key->area_nama}}</td> --}}
+                                <td>
+                                    {{-- <a href="{{ route('area.edit',['id'=>$key->area_id])}}" class="btn btn-success btn-sm">Edit</a> --}}
+                                </td>
+                                <td>
+                                    {{-- <form action="{{route('area.destroy',['id'=>$key->area_id])}}" method="POST"> --}}
+                                        @csrf
+                                        @method('DELETE')
+                                        {{-- <button class="btn btn-danger btn-sm" type="submit">Delete</button> --}}
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach   
+                    @endif
                 </tbody>
             </table>
         </div>

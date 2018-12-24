@@ -19,7 +19,7 @@
                     <thead>
                         <tr>
                             <th width="10">No</th>
-                            {{-- <th>Kategori</th> --}}
+                            <th>Kategori</th>
                             <th>Waroeng</th>
                             <th>Media Komplain</th>
                             <th>Isi Komplain</th>
@@ -37,7 +37,18 @@
                         @foreach ($data->komplain as $key)
                             <tr>
                                 <td>{{$no++}}</td>
-                                {{-- <td>{{$key->tb_kategori->nama_kategori}}</td> --}}
+                                <td>
+                                @foreach ($data->detail_komplain as $detail_komplain)
+                                    @if ($detail_komplain->komplain_id === $key->komplain_id)
+
+                                        @foreach ($data->kategori as $kategori)
+                                            @if ($kategori->id_kategori === $detail_komplain->id_kategori)
+                                                <span class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
+                                            @endif
+                                        @endforeach
+                                        @endif
+                                @endforeach
+                                </td>
                                 <td>{{$key->waroeng->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
@@ -59,6 +70,7 @@
                     </tbody>
                 </table>
             </div>
+            {{ $data->komplain->links() }}
             <div class="col-md-12">
                     <div id="chart"></div>
             </div>

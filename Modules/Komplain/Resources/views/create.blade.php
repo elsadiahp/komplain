@@ -6,15 +6,15 @@
             <div class="col-md-12">
                 <form action="{{route('komplain.store')}}" method="post">
                     @csrf
-                    {{-- <div class="form-group">
-                        <label for="id_kategori">Kategori</label>
-                        <select class="selection form-control" id="id_kategori" name="id_kategori">
-                            <option value="">-</option>
-                        @foreach ($data->kategori as $key)
-                            <option value="{{$key->id_kategori}}">{{$key->nama_kategori}}</option>
-                        @endforeach
+                    <div class="form-group">
+                        <label for="id_kategori">Nama Kategori </label>
+                        <select name="id_kategori[]" class="form-control detail" multiple="multiple">
+                            <option value="">--Pilih Nama Kategori--</option>
+                            @foreach($data->kategori as $kat)
+                                <option value="{{$kat->id_kategori}}">{{$kat->nama_kategori}}</option>
+                            @endforeach
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>
                         <select class="selection form-control" id="waroeng_id" name="waroeng_id">
