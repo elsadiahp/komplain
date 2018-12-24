@@ -39,18 +39,12 @@ class Waroeng extends Eloquent
 		'area_id'
 	];
 
-
-	public function komplain(){
-		return $this->belongsTo(\App\Models\Komplain::class);
-	}
-
 	public function area()
 	{
 		return $this->belongsTo(\App\Models\Area::class);
 	}
 
 	public function komplains()
-
 	{
 		return $this->hasMany(\App\Models\Komplain::class);
 	}

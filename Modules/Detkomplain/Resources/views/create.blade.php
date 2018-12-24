@@ -11,18 +11,6 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="komplain_id"class="col-md-12 control-label"> ID Komplain</label>
-                        <div class="col-md-12">
-                            <select name="komplain_id" id="komplain_id" class="form-control" required>
-                                <option value="">--Pilih ID Komplain--</option>
-                                @foreach($komplain as $kom)
-                                    <option value="{{$kom->komplain_id}}">{{$kom->komplain_id}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="id_kategori" class="col-md-12 control-label">Nama Kategori </label>
                         <div class="col-md-12">
                             <select name="id_kategori[]" class="form-control detail" multiple="multiple">

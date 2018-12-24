@@ -17,14 +17,23 @@ use Illuminate\Support\Facades\DB;
 
 class KomplainController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     * @return Response
+     */
     public function index()
     {
         $data = new \stdClass();
 
+
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->orderBy('komplain_id', 'asc')->get();
+
+        $data->komplain = Komplain::with(['waroeng','komplain_details'])->orderby('komplain_id','asc')->paginate(10);
+
         $data->waroeng = Waroeng::All()->count();
         $data->detail_komplain = KomplainDetail::with(['tb_kategori', 'komplain'])->get();
         $data->kategori = TbKategori::All();
+
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
 
@@ -36,7 +45,12 @@ class KomplainController extends Controller
 //            ->select('area_id' , DB::raw('count(area_id) as total'))
 //            ->with(['waroeng'])->get();
 
-        $no = 1;
+
+        $data->komplain2 = Komplain::groupBy('waroeng_id')
+            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
+            ->with(['waroeng'])->get();
+        $no=1;
+
 
         return view('komplain::index', compact('data', 'no'));
 
@@ -75,6 +89,15 @@ class KomplainController extends Controller
         return 500;
     }
 
+
+        return view('komplain::index', compact(['data','no']));
+    }
+    
+    /**
+     * Show the form for creating a new resource.
+     * @return Response
+     */
+
     public function create()
     {
         $data = new \stdClass();
@@ -85,9 +108,16 @@ class KomplainController extends Controller
         return view('komplain::create', compact('data'));
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * @param  Request $request
+     * @return Response
+     */
     public function store(Request $request)
     {
         $komplain = new Komplain();
+
+
 
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
@@ -96,6 +126,7 @@ class KomplainController extends Controller
         $komplain->waktu_komplain = $request->waktu_komplain;
         // dd($komplain);
         $komplain->save();
+
 
         $tag = $request->id_kategori;
         foreach($tag as $tags){
@@ -107,9 +138,27 @@ class KomplainController extends Controller
         }
 
         Session::flash('success', ' Komplain added successfully');
+
+            $tag = $request->id_kategori;
+            foreach($tag as $tags){
+                $detail_komplain = new KomplainDetail();
+                $detail_komplain->komplain_id = $komplain->komplain_id;
+                $detail_komplain->id_kategori =$tags;
+                // dd($detail_komplain);
+                $detail_komplain->save();
+            }
+        
+
+
+        Session::flash('success',' Komplain added successfully');
+
         return Redirect::route('komplain.index');
     }
 
+    /**
+     * Show the specified resource.
+     * @return Response
+     */
     public function show()
     {
         return view('komplain::show');
@@ -130,6 +179,11 @@ class KomplainController extends Controller
 
     }
 
+    /**
+     * Update the specified resource in storage.
+     * @param  Request $request
+     * @return Response
+     */
     public function update(Request $request, $id)
     {
         $komplain = Komplain::find($id);
@@ -175,5 +229,5 @@ class KomplainController extends Controller
         }
         return redirect()->route('komplain.index');
     }
-
+    
 }

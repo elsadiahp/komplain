@@ -8,6 +8,7 @@
                     @csrf
 
 
+
                     {{-- <div class="form-group">
                         <label for="id_kategori">Kategori</label>
                         <select class="selection form-control" id="id_kategori" name="id_kategori">
@@ -19,6 +20,7 @@
                     </div> --}}
 
 
+
                     <div class="form-group">
                         <label for="id_kategori">Nama Kategori </label>
                         <select name="id_kategori[]" class="form-control detail" multiple="multiple">
@@ -28,6 +30,7 @@
                             @endforeach
                         </select>
                     </div>
+
 
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>

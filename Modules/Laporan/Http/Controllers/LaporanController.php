@@ -6,12 +6,14 @@ namespace Modules\Laporan\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Charts;
 use App\Models\Komplain;
 use App\Models\Waroeng;
 use App\Models\KomplainDetail;
 use App\Models\TbKategori;
+use App\Models\Area;
+use Charts;
 use DB;
+use Carbon\Carbon;
 
 class LaporanController extends Controller
 {
@@ -21,6 +23,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
+
         $chart = Charts::multi('bar', 'material')
             ->title("My Cool Chart")
             ->dimensions(0, 400)
@@ -38,6 +41,21 @@ class LaporanController extends Controller
 //			      ->responsive(false)
 //			      ->groupByMonth(date('Y'), true);
         return view('laporan::index', ['chart' => $chart]);
+
+        $data = new \stdClass();
+
+        return $komplain = Komplain::where(DB::raw("(DATE_FORMAT(tanggal_komplain,'%m'))"),date('m'))->get();
+        
+
+        $data->chart = Charts::database($komplain, 'bar', 'highcharts')
+			      ->title("komplain detail")
+			      ->elementLabel("Total komplain")
+			      ->dimensions(1000, 500)
+			      ->responsive(false)
+                  ->groupByMonth(date('Y'), true);
+
+        return view('laporan::index',compact('data'));
+
     }
 
     /**

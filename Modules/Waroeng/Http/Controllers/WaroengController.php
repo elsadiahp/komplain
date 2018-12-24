@@ -52,7 +52,7 @@ class WaroengController extends Controller
         return Redirect::route('waroeng.index');
 
     }
- 
+
     /**
      * Show the specified resource.
      * @return Response

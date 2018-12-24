@@ -6,6 +6,7 @@
             <div class="col-md-12">
                 <form action="{{route('komplain.update', $data->komplain->komplain_id)}}" method="post">
                     @csrf
+
                     {{-- <div class="form-group">
                         <label for="kategori_id">Kategori</label>
                         <select class="selection form-control" name="id_kategori">
@@ -19,6 +20,7 @@
                         @endforeach
                         </select>
                     </div> --}}
+
 
 
                     <div class="form-group">
