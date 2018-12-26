@@ -18,7 +18,7 @@ class WaroengController extends Controller
      */
     public function index()
     {
-        $waroeng = Waroeng::with(['area'])->get();
+        $waroeng = Waroeng::with(['area'])->orderBy('waroeng_nama', 'asc')->get();
         $no = 1;
         return view('waroeng::index', compact( 'waroeng','no'));
     }

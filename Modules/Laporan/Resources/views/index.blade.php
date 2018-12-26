@@ -8,6 +8,9 @@
         <div class="col-md-12">
             <div class="panel-body">
                 {!! $data->chart->render() !!}
+                {!! $data->kategori->render() !!}
+                {!! $data->area->render() !!}
+                {!! $data->waroeng->render() !!}
             </div>
         </div>
     </div>

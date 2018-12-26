@@ -10,6 +10,7 @@ use App\Models\Waroeng;
 use App\Models\KomplainDetail;
 use App\Models\TbKategori;
 use App\Models\Area;
+use App\Charts\Bulan;
 use Charts;
 use DB;
 use Carbon\Carbon;
@@ -24,15 +25,40 @@ class LaporanController extends Controller
     {
         $data = new \stdClass();
 
-        return $komplain = Komplain::where(DB::raw("(DATE_FORMAT(tanggal_komplain,'%m'))"),date('m'))->get();
-        
-
+        $komplain = Komplain::select('*',DB::raw('MONTHNAME(tanggal_komplain) as month'))->orderBy('tanggal_komplain', 'asc')->get();
         $data->chart = Charts::database($komplain, 'bar', 'highcharts')
-			      ->title("komplain detail")
-			      ->elementLabel("Total komplain")
-			      ->dimensions(1000, 500)
-			      ->responsive(false)
-                  ->groupByMonth(date('Y'), true);
+                    ->title("komplain detail")
+                    ->dimensions(1000, 500)
+                    ->responsive(false)
+                    ->groupBy('month');
+
+        $kategori = DB::table('komplain_detail')->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
+                    ->get(); 
+        $data->kategori = Charts::database($kategori,'bar', 'highcharts')
+                  ->elementLabel(" Komplain Berdasarkan Kategori")
+                  ->title('Total Komplain Berdasarkan Kategori')
+                  ->dimensions(1000, 500)
+                  ->responsive(false)
+                  ->groupBy('nama_kategori');
+
+        $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
+                                        ->join('area', 'area.area_id','=','waroeng.area_id')
+                                        ->get();
+        $data->area = Charts::database($area,'bar', 'highcharts')
+                  ->elementLabel(" Komplain Berdasarkan Area")
+                  ->title('Total Komplain Berdasarkan Area')
+                  ->dimensions(1000, 500)
+                  ->responsive(false)
+                  ->groupBy('area_nama');
+
+        $waroeng = DB::table('komplain')->join('waroeng','komplain.waroeng_id','=','waroeng.waroeng_id')
+                                        ->get();
+        $data->waroeng = Charts::database($waroeng,'bar', 'highcharts')
+                  ->elementLabel(" Komplain Berdasarkan Waroeng")
+                  ->title('Total Komplain Berdasarkan Waroeng')
+                  ->dimensions(1000, 500)
+                  ->responsive(false)
+                  ->groupBy('waroeng_nama');
 
         return view('laporan::index',compact('data'));
     }

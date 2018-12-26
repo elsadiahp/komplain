@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="alamat_waroeng" class="col-md-12 control-label">Alamat Waroeng</label>
                         <div class="col-md-12">
-                            <input type="text" id="alamat_waroeng" name="alamat_waroeng" class="form-control" value="{{$waroeng->waroeng_alamat}}" required>
+                            <input type="text" id="alamat_waroeng" name="alamat_waroeng" class="form-control" value="{{$waroeng->waroeng_alamat}}">
                         </div>
                     </div>
 
