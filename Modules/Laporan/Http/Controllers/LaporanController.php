@@ -66,13 +66,18 @@ class LaporanController extends Controller
     public function chart(Request $request){
 
         $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
-                                        ->join('area', 'area.area_id','=','waroeng.area_id');
+                                        ->join('area', 'area.area_id','=','waroeng.area_id')
+                                        ->join('komplain_detail','komplain_detail.komplain_id','=','komplain.komplain_id')
+                                        ->join('tb_kategori','komplain_detail.id_kategori','tb_kategori.id_kategori');
                                         
         if ($request->m) {
             $area->where('komplain.tanggal_komplain', 'like','2018-'.$request->m.'-%%');
         }
         if ($request->k) {
-            $area->where('komplain_detail.nama_kategori', '=', $request->k);
+            $area->where('komplain_detail.id_kategori', '=', $request->k);
+        }
+        if ($request->a) {
+            $area->where('area.area_id', '=', $request->a);
         }
         return $area->get();
     }
