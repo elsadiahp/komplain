@@ -10,15 +10,14 @@
                 <form action="{{route('chart.kategori')}}" method="POST" class="form-horizontal col-md-8">
                     @csrf
                     <div class="form-group">
-                        <label for="area_id" class="col-md-12 control-label">PIlih Kategori</label>
+                        <label for="area_id" class="col-md-12 control-label">Tampilkan Tiap Kategori</label>
                         <div class="col-md-12">
-                            <select name="kategori" id="bulan" class="form-control" required>
+                            <select name="kategori" id="bulan" class="form-control" onchange="this.form.submit();" required>
                                 <option value="">--Pilih Nama Kategori--</option>
                                 @foreach($data->kat as $kategori)
                                     <option value="{{$kategori->id_kategori}}">{{$kategori->nama_kategori}}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn btn-primary">Pilih</button>
                         </div>
                     </div>
                     

@@ -9,16 +9,13 @@
                 <form action="{{route('laporan.area')}}" method="get">
                     <div class="form-group">
                         <label for="area_id">Nama Area </label>
-                        <select name="area_id" class="form-control detail">
+                        <select name="area_id" class="form-control detail" onchange="this.form.submit();" >
                             <option value="">--Pilih Nama area--</option>
                             @foreach($data->are as $a)
                                 <option value="{{$a->area_id}}">{{$a->area_nama}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>Pilih</button>
-                    </span>
                 </form>
                 <div class="panel-body">
                     {!! $data->area->render() !!}

@@ -36,16 +36,6 @@ class KomplainController extends Controller
 
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
-
-//        $data->chartwaroeng = Komplain::groupBy('waroeng_id')
-//            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
-//            ->with(['waroeng'])->get();
-
-//        $data->chartarea = Komplain::groupBy('area_id')
-//            ->select('area_id' , DB::raw('count(area_id) as total'))
-//            ->with(['waroeng'])->get();
-
-
         $data->komplain2 = Komplain::groupBy('waroeng_id')
             ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
             ->with(['waroeng'])->get();
@@ -54,27 +44,6 @@ class KomplainController extends Controller
 
         return view('komplain::index', compact('data', 'no'));
 
-    }
-
-    public function chart(Request $request)
-    {
-
-//        $data = \stdClass();
-        if ($request->p) {
-
-//            if ($request->m) {
-//
-//                $data = Komplain::where('tanggal_komplain', 'like', '%%' . $request->m . '%%')->groupBy($request->p);
-//            } else {
-//                $data = Komplain::groupBy($request->p);
-//            }
-//            $data->with(['waroeng'])
-//                ->select($request->p, DB::raw('count(' . $request->p . ') as value'));
-        $data = DB::select('SELECT waroeng.waroeng_id, waroeng.waroeng_nama as label, area.area_nama, COALESCE(v, 0) AS v FROM area,waroeng LEFT JOIN ( SELECT komplain.waroeng_id, COUNT(*) AS v FROM komplain GROUP BY komplain.waroeng_id ) v ON v.waroeng_id = waroeng.waroeng_id WHERE waroeng.area_id = area.area_id');
-//        $data->area = DB::select('SELECT area.area_nama, COUNT(waroeng.area_id) FROM waroeng JOIN area on waroeng.area_id = area.area_id GROUP BY waroeng.area_id');
-//        dd($area);
-        }
-        return $data;
     }
 
     /**
@@ -100,8 +69,7 @@ class KomplainController extends Controller
     public function store(Request $request)
     {
         $komplain = new Komplain();
-
-
+        
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;

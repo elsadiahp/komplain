@@ -12,13 +12,12 @@
                     <div class="form-group">
                         <label for="area_id" class="col-md-12 control-label">PIlih Bulan</label>
                         <div class="col-md-12">
-                            <select name="bulan" id="bulan" class="form-control" required>
+                            <select name="bulan" id="bulan" class="form-control" onchange="this.form.submit();" required>
                                 <option value="">--Pilih Nama Area--</option>
                                 @foreach($data->bulan as $bulan)
                                     <option value="{{$bulan->nm}}">{{$bulan->month}}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn btn-primary">Pilih</button>
                         </div>
                     </div>
                     
