@@ -41,7 +41,6 @@ class KomplainDetail extends Eloquent
 	public function tb_kategori()
 	{
 		return $this->belongsTo(\App\Models\TbKategori::class, 'id_kategori');
-		// return $this->hasMany(\App\Models\TbKategori::class, 'id_kategori');
 	}
 
 	public function komplain()

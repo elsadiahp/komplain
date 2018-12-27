@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace Modules\Laporan\Http\Controllers;
 
@@ -24,6 +24,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
+
         $data = new \stdClass();
 
         $komplain = Komplain::select('*',DB::raw('MONTHNAME(tanggal_komplain) as month'))->orderBy('tanggal_komplain', 'asc')->get();
@@ -105,6 +106,11 @@ class LaporanController extends Controller
 
         return view('laporan::kategori', compact('data'));
     }
+
+        return view('laporan::index');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      * @return Response
@@ -156,7 +162,46 @@ class LaporanController extends Controller
      */
     public function destroy()
     {
+    }    
+
+    public function chart_bulan(Request $request)
+    {
+        $data = new \stdClass();
+
+        $data->bulan = Komplain::select(DB::raw('MONTHNAME(tanggal_komplain) as month, MONTH(tanggal_komplain) as nm'))
+                        ->groupBy('nm')
+                        ->orderBy('nm','asc')
+                        ->get();
+        if ($request->input('bulan')) {
+            $komplain = Komplain::select('*',DB::raw('MONTHNAME(tanggal_komplain) as month'))
+                                ->join('waroeng', 'waroeng.waroeng_id', '=','komplain.waroeng_id')
+                                ->join('area','area.area_id','=','waroeng.area_id')
+                                ->whereMonth('tanggal_komplain',$request->input('bulan'))
+                                ->orderBy('tanggal_komplain', 'asc')
+                                ->get();
+            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
+                        ->elementLabel("Komplain Berdasarkan Bulan")            
+                        ->title("Total Komplain Berdasarkan Bulan")
+                        ->dimensions(1000, 500)
+                        ->responsive(false)
+                        ->groupBy('area_nama');
+        } else {
+            $kondisi = Carbon::now()->format('m');
+            $bulan = Carbon::now()->format('F');
+            $komplain = Komplain::select('*',DB::raw('MONTH(tanggal_komplain) as month'))
+                                ->join('waroeng', 'waroeng.waroeng_id', '=','komplain.waroeng_id')
+                                ->join('area','area.area_id','=','waroeng.area_id')
+                                ->whereMonth('tanggal_komplain','=',$kondisi)
+                                ->orderBy('tanggal_komplain', 'asc')
+                                ->get();
+            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
+                        ->elementLabel("Komplain Berdasarkan Bulan")            
+                        ->title("Total Komplain Berdasarkan Bulan")
+                        ->dimensions(1000, 500)
+                        ->responsive(false)
+                        ->groupBy('area_nama');
+        }
+        return view('laporan::bulan',compact(['data']));
     }
-    
-    
+
 }

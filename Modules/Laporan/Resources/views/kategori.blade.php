@@ -1,6 +1,7 @@
 @extends('back-end.app')
 
 @section('content')
+
     <h1>Chart</h1>
     <br>
     <div class="container">

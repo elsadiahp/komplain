@@ -9,8 +9,8 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel-body">
-                {!! $data->chart->render() !!}
-                {!! $data->kategori->render() !!}
+                <a href="{{route('chart.bulan')}}" class="btn btn-primary">Detail Chart Komplain Perbulan</a>
+                <a href="{{route('chart.kategori')}}" class="btn btn-primary">Detail Chart Kategori Komplain Perarea</a>
                 {!! $data->area->render() !!}
                 {!! $data->waroeng->render() !!}
             </div>
