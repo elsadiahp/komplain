@@ -6,8 +6,13 @@ use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redirect;
+
 use App\Models\KomplainDetail;
 use Session;
+
+
+
 
 class DetkomplainController extends Controller
 {

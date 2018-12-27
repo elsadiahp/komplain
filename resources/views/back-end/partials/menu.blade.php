@@ -26,9 +26,9 @@
                 <i class="nav-icon icon-speedometer"></i> Komplain 
               </a>
             </li>
-            <li class="nav-item">
+              <li class="nav-item">
               <a class="nav-link" href="{{ route('laporan.index')}}">
-                <i class="nav-icon icon-speedometer"></i> Laporan 
+                <i class="nav-icon icon-speedometer"></i> Laporan
               </a>
             </li>
           </ul>
