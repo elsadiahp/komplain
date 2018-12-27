@@ -178,7 +178,11 @@ return [
 
         //Reliese Code:model
         Reliese\Coders\CodersServiceProvider::class,
+
+
+        //chart
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+
 
 
     ],
@@ -229,7 +233,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //chart
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+
 
     ],
 

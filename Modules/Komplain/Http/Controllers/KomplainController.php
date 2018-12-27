@@ -37,6 +37,10 @@ class KomplainController extends Controller
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
 
+
+        $data->komplain2 = Komplain::groupBy('waroeng_id')
+            ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
+            ->with(['waroeng'])->get();
         $no = 1;
 
 
@@ -46,7 +50,6 @@ class KomplainController extends Controller
 
     public function chart(Request $request)
     {
-
         if ($request->p == 'waroeng_id') {
 
             $data = DB::select('SELECT
@@ -82,11 +85,6 @@ GROUP BY name');
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-
     public function create()
     {
         $data = new \stdClass();
@@ -97,11 +95,6 @@ GROUP BY name');
         return view('komplain::create', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         $komplain = new Komplain();
@@ -112,7 +105,6 @@ GROUP BY name');
         $komplain->isi_komplain = $request->isi_komplain;
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
-        // dd($komplain);
         $komplain->save();
 
 

@@ -18,7 +18,6 @@
                         class="glyphicon glyphicon-plus"> Tambah</span></a>
                 <table class="table table-bordered">
                     <thead>
-
                     <tr>
                         <th width="10">No</th>
                         <th>Kategori</th>
@@ -29,7 +28,6 @@
                         <th>Waktu Komplain</th>
                         <th colspan="2" style="text-align:center;">Action</th>
                     </tr>
-
                     <tbody>
                     @if (count($data->komplain)==0)
                         <tr>
@@ -118,6 +116,7 @@
                         dataPoints: items
                     }]
                 });
+
                 $.get($id1.attr('url'), function (data) {
 
                 }).then(function (data) {
@@ -143,7 +142,5 @@
             G9.Chart("chartArea");
             G9.Chart("chartWaroeng");
         };
-
-
     </script>
 @endsection
