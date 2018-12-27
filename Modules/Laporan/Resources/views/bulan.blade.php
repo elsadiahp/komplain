@@ -18,7 +18,6 @@
                                     <option value="{{$bulan->nm}}">{{$bulan->month}}</option>
                                 @endforeach
                             </select>
-                            <button type="submit" class="btn btn-primary">Pilih</button>
                         </div>
                     </div>
                     

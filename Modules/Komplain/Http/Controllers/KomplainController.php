@@ -37,7 +37,6 @@ class KomplainController extends Controller
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
 
-
         $data->komplain2 = Komplain::groupBy('waroeng_id')
             ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
             ->with(['waroeng'])->get();
@@ -47,6 +46,7 @@ class KomplainController extends Controller
         return view('komplain::index', compact('data', 'no'));
 
     }
+
 
     public function chart(Request $request)
     {
@@ -84,7 +84,6 @@ GROUP BY name');
         return 500;
     }
 
-
     public function create()
     {
         $data = new \stdClass();
@@ -98,8 +97,7 @@ GROUP BY name');
     public function store(Request $request)
     {
         $komplain = new Komplain();
-
-
+        
         $komplain->waroeng_id = $request->waroeng_id;
         $komplain->media_koplain = $request->media_komplain;
         $komplain->isi_komplain = $request->isi_komplain;

@@ -24,6 +24,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
+
         $data = new \stdClass();
 
         $komplain = Komplain::select('*', DB::raw('MONTHNAME(tanggal_komplain) as month'))->orderBy('tanggal_komplain', 'asc')->get();
@@ -63,6 +64,7 @@ class LaporanController extends Controller
             ->groupBy('waroeng_nama');
 
         return view('laporan::index', compact('data'));
+
     }
 
     public function area(Request $request)
@@ -86,12 +88,11 @@ class LaporanController extends Controller
         return view('laporan::area', compact('data'));
     }
 
+
     public function kategori(Request $request)
     {
 
-        $data = new \stdClass();
-
-        $data->kat = Kategori::get();
+         $data = new \stdClass();
 
         $data->k = $request->get('id_kategori');
         $kategori = DB::table('tb_kategori')->join('komplain_detail', 'komplain_detail.id_kategori', '=', 'tb_kategori.id_kategori')
@@ -108,11 +109,6 @@ class LaporanController extends Controller
 
         return view('laporan::kategori', compact('data'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
     public function create()
     {
         return view('laporan::create');
