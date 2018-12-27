@@ -2,6 +2,7 @@
 
 namespace Modules\Laporan\Http\Controllers;
 
+use App\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -45,7 +46,7 @@ class LaporanController extends Controller
         $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
                                         ->join('area', 'area.area_id','=','waroeng.area_id')
                                         ->get();
-        $data->area = Charts::database($area,'bar', 'highcharts')
+        $data->area = Charts::database($area,'pie', 'highcharts')
                   ->elementLabel("Komplain Berdasarkan Area")
                   ->title('Total Komplain Berdasarkan Area')
                   ->dimensions(1000, 500)
@@ -54,7 +55,7 @@ class LaporanController extends Controller
 
         $waroeng = DB::table('komplain')->join('waroeng','komplain.waroeng_id','=','waroeng.waroeng_id')
                                         ->get();
-        $data->waroeng = Charts::database($waroeng,'bar', 'highcharts')
+        $data->waroeng = Charts::database($waroeng,'pie', 'highcharts')
                   ->elementLabel("Komplain Berdasarkan Waroeng")
                   ->title('Total Komplain Berdasarkan Waroeng')
                   ->dimensions(1000, 500)
@@ -63,23 +64,46 @@ class LaporanController extends Controller
 
         return view('laporan::index',compact('data'));
     }
-    public function chart(Request $request){
+    public function area(Request $request){
 
+        $data = new \stdClass();
+
+        $data->are = Area::get();
+
+        $data->a = $request->get('area_id');
         $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
-                                        ->join('area', 'area.area_id','=','waroeng.area_id')
-                                        ->join('komplain_detail','komplain_detail.komplain_id','=','komplain.komplain_id')
-                                        ->join('tb_kategori','komplain_detail.id_kategori','tb_kategori.id_kategori');
-                                        
-        if ($request->m) {
-            $area->where('komplain.tanggal_komplain', 'like','2018-'.$request->m.'-%%');
-        }
-        if ($request->k) {
-            $area->where('komplain_detail.id_kategori', '=', $request->k);
-        }
-        if ($request->a) {
-            $area->where('area.area_id', '=', $request->a);
-        }
-        return $area->get();
+            ->join('area', 'waroeng.area_id', '=', 'area.area_id')
+            ->where('area.area_id', 'like', '%%' .$data->a. '%%')->get();
+        $data->area = Charts::database($area,'bar', 'highcharts')
+            ->elementLabel("Komplain Berdasarkan Waroeng ")
+            ->title('Total Komplain Berdasarkan Waroeng')
+            ->dimensions(1000, 500)
+            ->responsive(false)
+            ->groupBy('waroeng_nama');
+
+        return view('laporan::area', compact('data'));
+    }
+
+    public function kategori(Request $request){
+
+        $data = new \stdClass();
+
+        $data->kat = Kategori::get();
+
+        $data->k = $request->get('id_kategori');
+        $kategori = DB::table('tb_kategori')->join('komplain_detail', 'komplain_detail.id_kategori', '=', 'tb_kategori.id_kategori')
+            ->join('komplain', 'komplain_detail.komplain_id', '=', 'komplain.komplain_id')
+            ->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
+            ->join('area', 'waroeng.area_id', '=', 'area.area_id')
+            ->where('tb_kategori.id_kategori', 'like', '%%' .$data->k. '%%')->get();
+        $data->kategori = Charts::database($kategori,'bar', 'highcharts')
+            ->elementLabel("Komplain Kategori Berdasarkan Area ")
+            ->title('Total Komplain Kategori Berdasarkan Area')
+            ->dimensions(1000, 500)
+            ->responsive(false)
+            ->groupBy('area_nama');
+
+        return view('laporan::kategori', compact('data'));
     }
     /**
      * Show the form for creating a new resource.

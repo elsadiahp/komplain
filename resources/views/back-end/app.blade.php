@@ -16,6 +16,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+      {!! Charts::assets() !!}
     <title>CoreUI Free Bootstrap Admin Template</title>
     @include('back-end.partials.css')
   </head>
