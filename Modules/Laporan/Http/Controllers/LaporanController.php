@@ -23,64 +23,9 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $data = new \stdClass();
-
-        $komplain = Komplain::select('*',DB::raw('MONTHNAME(tanggal_komplain) as month'))->orderBy('tanggal_komplain', 'asc')->get();
-        $data->chart = Charts::database($komplain, 'bar', 'highcharts')
-                    ->elementLabel("Komplain Berdasarkan Bulan")            
-                    ->title("Total Komplain Berdasarkan Bulan")
-                    ->dimensions(1000, 500)
-                    ->responsive(false)
-                    ->groupBy('month');
-
-        $kategori = DB::table('komplain_detail')->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
-                    ->get(); 
-        $data->kategori = Charts::database($kategori,'bar', 'highcharts')
-                  ->elementLabel("Komplain Berdasarkan Kategori")
-                  ->title('Total Komplain Berdasarkan Kategori')
-                  ->dimensions(1000, 500)
-                  ->responsive(false)
-                  ->groupBy('nama_kategori');
-
-        $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
-                                        ->join('area', 'area.area_id','=','waroeng.area_id')
-                                        ->get();
-        $data->area = Charts::database($area,'bar', 'highcharts')
-                  ->elementLabel("Komplain Berdasarkan Area")
-                  ->title('Total Komplain Berdasarkan Area')
-                  ->dimensions(1000, 500)
-                  ->responsive(false)
-                  ->groupBy('area_nama');
-
-        $waroeng = DB::table('komplain')->join('waroeng','komplain.waroeng_id','=','waroeng.waroeng_id')
-                                        ->get();
-        $data->waroeng = Charts::database($waroeng,'bar', 'highcharts')
-                  ->elementLabel("Komplain Berdasarkan Waroeng")
-                  ->title('Total Komplain Berdasarkan Waroeng')
-                  ->dimensions(1000, 500)
-                  ->responsive(false)
-                  ->groupBy('waroeng_nama');
-
-        return view('laporan::index',compact('data'));
+        return view('laporan::index');
     }
-    public function chart(Request $request){
 
-        $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
-                                        ->join('area', 'area.area_id','=','waroeng.area_id')
-                                        ->join('komplain_detail','komplain_detail.komplain_id','=','komplain.komplain_id')
-                                        ->join('tb_kategori','komplain_detail.id_kategori','tb_kategori.id_kategori');
-                                        
-        if ($request->m) {
-            $area->where('komplain.tanggal_komplain', 'like','2018-'.$request->m.'-%%');
-        }
-        if ($request->k) {
-            $area->where('komplain_detail.id_kategori', '=', $request->k);
-        }
-        if ($request->a) {
-            $area->where('area.area_id', '=', $request->a);
-        }
-        return $area->get();
-    }
     /**
      * Show the form for creating a new resource.
      * @return Response
@@ -132,7 +77,84 @@ class LaporanController extends Controller
      */
     public function destroy()
     {
+    }    
+
+    public function chart_bulan(Request $request)
+    {
+        $data = new \stdClass();
+
+        $data->bulan = Komplain::select(DB::raw('MONTHNAME(tanggal_komplain) as month, MONTH(tanggal_komplain) as nm'))
+                        ->groupBy('nm')
+                        ->orderBy('nm','asc')
+                        ->get();
+        if ($request->input('bulan')) {
+            $komplain = Komplain::select('*',DB::raw('MONTHNAME(tanggal_komplain) as month'))
+                                ->join('waroeng', 'waroeng.waroeng_id', '=','komplain.waroeng_id')
+                                ->join('area','area.area_id','=','waroeng.area_id')
+                                ->whereMonth('tanggal_komplain',$request->input('bulan'))
+                                ->orderBy('tanggal_komplain', 'asc')
+                                ->get();
+            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
+                        ->elementLabel("Komplain Berdasarkan Bulan")            
+                        ->title("Total Komplain Berdasarkan Bulan")
+                        ->dimensions(1000, 500)
+                        ->responsive(false)
+                        ->groupBy('area_nama');
+        } else {
+            $kondisi = Carbon::now()->format('m');
+            $bulan = Carbon::now()->format('F');
+            $komplain = Komplain::select('*',DB::raw('MONTH(tanggal_komplain) as month'))
+                                ->join('waroeng', 'waroeng.waroeng_id', '=','komplain.waroeng_id')
+                                ->join('area','area.area_id','=','waroeng.area_id')
+                                ->whereMonth('tanggal_komplain','=',$kondisi)
+                                ->orderBy('tanggal_komplain', 'asc')
+                                ->get();
+            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
+                        ->elementLabel("Komplain Berdasarkan Bulan")            
+                        ->title("Total Komplain Berdasarkan Bulan")
+                        ->dimensions(1000, 500)
+                        ->responsive(false)
+                        ->groupBy('area_nama');
+        }
+        return view('laporan::bulan',compact(['data']));
     }
-    
-    
+
+    public function chart_kategori(Request $request)
+    {
+        $data = new \stdClass();
+        $data->kat = DB::table('komplain_detail')
+                    ->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
+                    ->join('komplain', 'komplain.komplain_id', '=', 'komplain_detail.komplain_id')
+                    ->join('waroeng', 'waroeng.waroeng_id', '=', 'komplain.waroeng_id')
+                    ->join('area','area.area_id','=','waroeng.area_id')
+                    ->groupBy('tb_kategori.nama_kategori')
+                    ->get(); 
+
+        if ($request->input('kategori')) {
+            $kategori = DB::table('komplain_detail')
+                    ->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
+                    ->join('komplain', 'komplain.komplain_id', '=', 'komplain_detail.komplain_id')
+                    ->join('waroeng', 'waroeng.waroeng_id', '=', 'komplain.waroeng_id')
+                    ->join('area','area.area_id','=','waroeng.area_id')
+                    ->where('tb_kategori.id_kategori','=',$request->input('kategori'))
+                    ->get(); 
+            $data->kategori = Charts::database($kategori,'bar', 'chartjs')
+                    ->elementLabel("Komplain Berdasarkan Kategori")
+                    ->title('Total Komplain Berdasarkan Kategori')
+                    ->dimensions(1000, 500)
+                    ->responsive(false)
+                    ->groupBy('area_nama');
+        } else {
+            $kategori = DB::table('komplain_detail')
+                    ->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
+                    ->get(); 
+            $data->kategori = Charts::database($kategori,'bar', 'chartjs')
+                    ->elementLabel("Komplain Berdasarkan Semua Kategori" )
+                    ->title('Total Komplain Berdasarkan Kategori')
+                    ->dimensions(1000, 500)
+                    ->responsive(false)
+                    ->groupBy('nama_kategori');
+        }
+        return view('laporan::kategori',compact(['data']));
+    }
 }
