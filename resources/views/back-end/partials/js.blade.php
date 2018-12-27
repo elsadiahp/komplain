@@ -1,4 +1,20 @@
-<!-- CoreUI and necessary plugins-->
+@php
+    $host =  $_SERVER['HTTP_HOST'];
+    $file = 'http://'.$host.':3000/browser-sync/browser-sync-client.js?v=2.26.3';
+    $file_headers = @get_headers($file);
+
+    if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found')
+    {
+
+    }
+    else
+    {
+    echo '<script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='.$file.'><\/script>");
+    //]]></script>';
+    }
+@endphp
+
 <script src="{{asset('back-end/vendors/jquery/js/jquery.min.js')}}"></script>
 <script src="{{asset('back-end/vendors/popper.js/js/popper.min.js')}}"></script>
 <script src="{{asset('back-end/vendors/bootstrap/js/bootstrap.min.js')}}"></script>
