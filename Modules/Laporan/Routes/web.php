@@ -17,6 +17,6 @@ Route::prefix('laporan')->group(function() {
     Route::post('/chart/bulan', 'LaporanController@chart_bulan')->name('chart.bulan');
     Route::get('/chart/kategori', 'LaporanController@chart_kategori')->name('chart.kategori');
     Route::post('/chart/kategori', 'LaporanController@chart_kategori')->name('chart.kategori');
-    Route::get('/chartarea', 'LaporanController@area')->name('laporan.area');
-    Route::get('/chartkategori', 'LaporanController@kategori')->name('laporan.kategori');
+    Route::get('/chart/area', 'LaporanController@area')->name('laporan.area');
+    Route::get('/chart/kategori', 'LaporanController@kategori')->name('laporan.kategori');
 });

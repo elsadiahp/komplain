@@ -456,5 +456,6 @@
     @include('back-end.partials.footer')
     @include('back-end.partials.js')
     @yield('js')
+    
   </body>
 </html>

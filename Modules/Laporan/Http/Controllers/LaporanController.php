@@ -135,12 +135,6 @@ class LaporanController extends Controller
                                 ->whereMonth('tanggal_komplain',$request->input('bulan'))
                                 ->orderBy('tanggal_komplain', 'asc')
                                 ->get();
-            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
-                        ->elementLabel("Komplain Berdasarkan Bulan")            
-                        ->title("Total Komplain Berdasarkan Bulan")
-                        ->dimensions(1000, 500)
-                        ->responsive(false)
-                        ->groupBy('area_nama');
         } else {
             $kondisi = Carbon::now()->format('m');
             $bulan = Carbon::now()->format('F');
@@ -150,13 +144,13 @@ class LaporanController extends Controller
                                 ->whereMonth('tanggal_komplain','=',$kondisi)
                                 ->orderBy('tanggal_komplain', 'asc')
                                 ->get();
-            $data->chart = Charts::database($komplain, 'bar', 'chartjs')
-                        ->elementLabel("Komplain Berdasarkan Bulan")            
-                        ->title("Total Komplain Berdasarkan Bulan")
-                        ->dimensions(1000, 500)
-                        ->responsive(false)
-                        ->groupBy('area_nama');
         }
+            $data->chart = Charts::database($komplain, 'bar', 'highcharts')
+                            ->elementLabel("Komplain Berdasarkan Bulan")            
+                            ->title("Total Komplain Berdasarkan Bulan")
+                            ->dimensions(1000, 500)
+                            ->responsive(false)
+                            ->groupBy('area_nama');
         return view('laporan::bulan',compact(['data']));
     }
 
@@ -179,23 +173,17 @@ class LaporanController extends Controller
                     ->join('area','area.area_id','=','waroeng.area_id')
                     ->where('tb_kategori.id_kategori','=',$request->input('kategori'))
                     ->get(); 
-            $data->kategori = Charts::database($kategori,'bar', 'chartjs')
-                    ->elementLabel("Komplain Berdasarkan Kategori")
-                    ->title('Total Komplain Berdasarkan Kategori')
-                    ->dimensions(1000, 500)
-                    ->responsive(false)
-                    ->groupBy('area_nama');
         } else {
             $kategori = DB::table('komplain_detail')
                     ->join('tb_kategori', 'tb_kategori.id_kategori', '=', 'komplain_detail.id_kategori')
                     ->get(); 
-            $data->kategori = Charts::database($kategori,'bar', 'chartjs')
-                    ->elementLabel("Komplain Berdasarkan Semua Kategori" )
-                    ->title('Total Komplain Berdasarkan Kategori')
-                    ->dimensions(1000, 500)
-                    ->responsive(false)
-                    ->groupBy('nama_kategori');
         }
+            $data->kategori = Charts::database($kategori,'bar', 'highcharts')
+            ->elementLabel("Komplain Berdasarkan Kategori")
+            ->title('Total Komplain Berdasarkan Kategori')
+            ->dimensions(1000, 500)
+            ->responsive(false)
+            ->groupBy('area_nama');
         return view('laporan::kategori',compact(['data']));
     }
 }
