@@ -36,6 +36,7 @@ class KomplainController extends Controller
 
 
         $data->komplain = Komplain::with(['waroeng', 'komplain_details'])->get();
+
         $data->komplain2 = Komplain::groupBy('waroeng_id')
             ->select('waroeng_id', DB::raw('count(waroeng_id) as total'))
             ->with(['waroeng'])->get();
@@ -46,10 +47,42 @@ class KomplainController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
+
+    public function chart(Request $request)
+    {
+        if ($request->p == 'waroeng_id') {
+
+            $data = DB::select('SELECT
+              waroeng.waroeng_id,
+              waroeng.waroeng_nama as name,
+              area.area_nama,
+              COALESCE(v, 0) AS v
+            
+            FROM area,waroeng
+                        LEFT JOIN (
+              SELECT waroeng_id, COUNT(*) AS v
+              FROM komplain
+              GROUP BY waroeng_id
+            ) vs ON vs.waroeng_id = waroeng.waroeng_id
+            WHERE waroeng.area_id = area.area_id');
+
+            return $data;
+        } else if ($request->p == 'area_id') {
+            $data = DB::select('SELECT a.area_nama AS name,
+       SUM(s)         AS v
+FROM area a,
+     waroeng w
+       LEFT JOIN (
+       SELECT waroeng_id, COUNT(*) AS s
+       FROM komplain k
+       GROUP BY k.waroeng_id
+     ) k ON k.waroeng_id = w.waroeng_id
+WHERE w.area_id = a.area_id
+GROUP BY name');
+            return $data;
+        }
+        return 500;
+    }
 
     public function create()
     {
@@ -61,11 +94,6 @@ class KomplainController extends Controller
         return view('komplain::create', compact('data'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
     public function store(Request $request)
     {
         $komplain = new Komplain();
@@ -75,7 +103,6 @@ class KomplainController extends Controller
         $komplain->isi_komplain = $request->isi_komplain;
         $komplain->tanggal_komplain = $request->tanggal_komplain;
         $komplain->waktu_komplain = $request->waktu_komplain;
-        // dd($komplain);
         $komplain->save();
 
 

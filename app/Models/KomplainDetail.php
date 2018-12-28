@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Dec 2018 07:50:13 +0000.
+ * Date: Fri, 28 Dec 2018 01:21:27 +0000.
  */
 
 namespace App\Models;
@@ -45,6 +45,6 @@ class KomplainDetail extends Eloquent
 
 	public function komplain()
 	{
-		return $this->belongsTo(\App\Models\Komplain::class, 'komplain_id');
+		return $this->belongsTo(\App\Models\Komplain::class);
 	}
 }

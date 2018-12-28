@@ -10,10 +10,10 @@
                 <form action="{{route('chart.bulan')}}" method="POST" class="form-horizontal col-md-8">
                     @csrf
                     <div class="form-group">
-                        <label for="area_id" class="col-md-12 control-label">PIlih Bulan</label>
+                        <label for="area_id" class="col-md-12 control-label">Pilih Bulan</label>
                         <div class="col-md-12">
-                            <select name="bulan" id="bulan" class="form-control" onchange="this.form.submit();" required>
-                                <option value="">--Pilih Nama Area--</option>
+                            <select name="bulan" id="bulan" class="form-control" required>
+                                <option value="">--Pilih Nama Bulan--</option>
                                 @foreach($data->bulan as $bulan)
                                     <option value="{{$bulan->nm}}">{{$bulan->month}}</option>
                                 @endforeach

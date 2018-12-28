@@ -16,7 +16,8 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-      {!! Charts::assets() !!}
+    {!! Charts::assets() !!}
+      @include('back-end.partials.css')
     <title>CoreUI Free Bootstrap Admin Template</title>
     @include('back-end.partials.css')
   </head>
@@ -195,7 +196,7 @@
               </div>
               <div class="list-group-item list-group-item-accent-info">
                 <div class="avatar float-right">
-                  <img class="img-avatar" src="{{ asset('img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
+                  <img class="img-avatar" src="{{ asset('back-end/img/avatars/4.jpg')}}" alt="admin@bootstrapmaster.com">
                 </div>
                 <div>Skype with
                   <strong>Megan</strong>
@@ -448,7 +449,7 @@
         @if(Session::has('success'))
             toastr.success("{{ Session::get('success') }}")
         @endif
-    
+
         @if(Session::has('info'))
             toastr.info("{{ Session::get('info') }}")
         @endif
