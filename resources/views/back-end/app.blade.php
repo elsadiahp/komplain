@@ -18,7 +18,7 @@
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
     {!! Charts::assets() !!}
       @include('back-end.partials.css')
-    <title>CoreUI Free Bootstrap Admin Template</title>
+    <title>Kompline</title>
     @include('back-end.partials.css')
   </head>
   <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
@@ -35,7 +35,7 @@
       </button>
       <ul class="nav navbar-nav d-md-down-none">
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" href="{{ route('dashboard')}}">Dashboard</a>
         </li>
         <li class="nav-item px-3">
           <a class="nav-link" href="#">Users</a>
@@ -120,11 +120,10 @@
       <main class="main">
         <!-- Breadcrumb-->
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">Home</li>
+          {{-- <li class="breadcrumb-item">Home</li>
           <li class="breadcrumb-item">
-            <a href="#">Admin</a>
-          </li>
-          <li class="breadcrumb-item active">Dashboard</li>
+            <a href="#">Dashboard</a>
+          </li> --}}
           <!-- Breadcrumb Menu-->
           <li class="breadcrumb-menu d-md-down-none">
             <div class="btn-group" role="group" aria-label="Button group">

@@ -43,7 +43,11 @@
                     </div>
                     <div class="form-group">
                             <label for="status">Status</label>
-                            <input type="text" class="form-control" name="status" value="{{$data->komplain->status}}">
+                            <select name="status" class="form-control">
+                            <option value="{{$data->komplain->status}}" selected>{{$data->komplain->status}}</option>
+                            <option value="Selesai">Selesai</option>
+                            <option value="Butuh Tindak Lanjut">Butuh Tindak Lanjut</option>
+                            </select>
                         </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
