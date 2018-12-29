@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Dec 2018 07:50:13 +0000.
+ * Date: Sat, 29 Dec 2018 06:47:06 +0000.
  */
 
 namespace App\Models;
@@ -35,10 +35,10 @@ class Komplain extends Eloquent
 		'waroeng_id' => 'int'
 	];
 
-	// protected $dates = [
-	// 	'tanggal_komplain',
-	// 	'waktu_komplain'
-	// ];
+	protected $dates = [
+		'tanggal_komplain',
+		'waktu_komplain'
+	];
 
 	protected $fillable = [
 		'waroeng_id',
@@ -50,11 +50,11 @@ class Komplain extends Eloquent
 
 	public function waroeng()
 	{
-		return $this->belongsTo(\App\Models\Waroeng::class,'waroeng_id');
+		return $this->belongsTo(\App\Models\Waroeng::class);
 	}
 
 	public function komplain_details()
 	{
-		return $this->hasMany(\App\Models\KomplainDetail::class,'komplain_detail_id');
+		return $this->hasMany(\App\Models\KomplainDetail::class);
 	}
 }

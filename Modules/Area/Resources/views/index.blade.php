@@ -16,7 +16,7 @@
                 </div>                    
             @endif
                 <br>
-            <a href="{{ route('area.create')}}" class="btn btn-primary btn-sm pull-right" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>
+            <a href="{{ route('area.create')}}" class="btn btn-primary btn-sm pull-left" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>
                 <br>
                 <br>
             <table class="table table-striped">

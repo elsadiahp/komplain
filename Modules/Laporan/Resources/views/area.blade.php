@@ -6,6 +6,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <a href="{{route('laporan.index')}}" class="btn btn-warning">Kembali</a>
+                <br>
+                <br>
                 <form action="{{route('laporan.area')}}" method="get">
                     <div class="form-group">
                         <label for="area_id">Nama Area </label>

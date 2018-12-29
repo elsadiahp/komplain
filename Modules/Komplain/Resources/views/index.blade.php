@@ -14,13 +14,17 @@
                     </div>
                 @endif
                 <h1>Komplain</h1>
-                <a href="{{ route('komplain.create')}}" class="btn btn-primary btn-sm pull-right marginBottom20px"><span
+                    <br>
+                <a href="{{ route('komplain.create')}}" class="btn btn-primary btn-sm pull-left marginBottom20px"><span
                         class="glyphicon glyphicon-plus"> Tambah</span></a>
+                    <br>
+                    <br>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th width="10">No</th>
                         <th>Kategori</th>
+                        <th>Kategori Detail</th>
                         <th>Waroeng</th>
                         <th>Media Komplain</th>
                         <th>Isi Komplain</th>
@@ -40,16 +44,31 @@
                                 <td>
                                     @foreach ($data->detail_komplain as $detail_komplain)
                                         @if ($detail_komplain->komplain_id === $key->komplain_id)
-                                            @foreach ($data->kategori as $kategori)
-                                                @if ($kategori->id_kategori === $detail_komplain->id_kategori)
-                                                    <span
-                                                        class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
+                                            @foreach ($data->detail_kategori as $kategori)
+                                                @if ($kategori->kategori_detail_id === $detail_komplain->kategori_detail_id)
+                                                    @foreach($data->kategori as $kat)
+                                                        @if($kat->id_kategori === $kategori->id_kategori)
+                                                             <span class="label label-info">{{ $kat->nama_kategori . ',' }}</span>
+                                                        @endif
+                                                    @endforeach
                                                 @endif
                                             @endforeach
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{$key->waroeng->waroeng_nama}}</td>
+                                <td>
+                                    @foreach ($data->detail_komplain as $detail_komplain)
+                                        @if ($detail_komplain->komplain_id === $key->komplain_id)
+                                            @foreach ($data->detail_kategori as $kategori)
+                                                @if ($kategori->kategori_detail_id === $detail_komplain->kategori_detail_id)
+                                                    <span
+                                                        class="label label-info">{{ $kategori->kategori_detail_nama . ',' }}</span>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>{{$key->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
                                 <td>{{$key->tanggal_komplain}}</td>
@@ -74,73 +93,75 @@
             </div>
 
 
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div id="chartWaroeng" style="height: 370px; width: 100%;"
-                         url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>
-                </div>
-                <div class="col-md-12">
-                    <div id="chartArea" style="height: 370px; width: 100%;"
-                         url="{{route('komplain.chart', ['p'=>'area_id'])}}" title="Area"></div>
-                </div>
-            </div>
+            {{--<div class="col-md-12">--}}
+                {{--<div class="col-md-12">--}}
+                    {{--<div id="chartWaroeng" style="height: 370px; width: 100%;"--}}
+                         {{--url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-12">--}}
+                    {{--<div id="chartArea" style="height: 370px; width: 100%;"--}}
+                         {{--url="{{route('komplain.chart', ['p'=>'area_id'])}}" title="Area"></div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         </div>
     </div>
 @endsection
-@section('js')
+{{--@section('js')--}}
 
-    <script type="text/javascript" src="//canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-    <script type="text/javascript">
-        var G9 = function () {
-            var initChart = function (id) {
-                var items = [];
-                $id1 = $('#' + id);
-                var idr = id;
-                idr = new CanvasJS.Chart(id, {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    title: {
-                        text: $id1.attr('title')
-                    },
-                    legend: {
-                        horizontalAlign: "right",
-                        verticalAlign: "center"
-                    },
-                    data: [{
-                        type: "pie",
-                        showInLegend: true,
-                        percentFormatString: "#",
-                        toolTipContent: "<b>{name}</b>: Total {y} - #percent %",
-                        indexLabel: "(#percent%)",
-                        legendText: "{name} Total {y} (#percent%)",
-                        dataPoints: items
-                    }]
-                });
+    {{--<script type="text/javascript" src="//canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>--}}
+    {{--<script type="text/javascript">--}}
+        {{--var G9 = function () {--}}
+            {{--var initChart = function (id) {--}}
+                {{--var items = [];--}}
+                {{--$id1 = $('#' + id);--}}
+                {{--var idr = id;--}}
+                {{--idr = new CanvasJS.Chart(id, {--}}
+                    {{--exportEnabled: true,--}}
+                    {{--animationEnabled: true,--}}
+                    {{--title: {--}}
+                        {{--text: $id1.attr('title')--}}
+                    {{--},--}}
+                    {{--legend: {--}}
+                        {{--horizontalAlign: "right",--}}
+                        {{--verticalAlign: "center"--}}
+                    {{--},--}}
+                    {{--data: [{--}}
+                        {{--type: "pie",--}}
+                        {{--showInLegend: true,--}}
+                        {{--percentFormatString: "#",--}}
+                        {{--toolTipContent: "<b>{name}</b>: Total {y} - #percent %",--}}
+                        {{--indexLabel: "(#percent%)",--}}
+                        {{--legendText: "{name} Total {y} (#percent%)",--}}
+                        {{--dataPoints: items--}}
+                    {{--}]--}}
+                {{--});--}}
 
-                $.get($id1.attr('url'), function (data) {
+                {{--$.get($id1.attr('url'), function (data) {--}}
 
-                }).then(function (data) {
+                {{--}).then(function (data) {--}}
 
-                    $.each(data, function (d, i) {
-                        items.push({
-                            y: parseInt(i.v),
-                            name: i.name
-                        });
-                    });
-                })
-                    .done(function () {
-                        idr.render()
-                    });
-            };
-            return {
-                Chart: function (id) {
-                    initChart(id)
-                }
-            }
-        }();
-        window.onload = function() {
-            G9.Chart("chartArea");
-            G9.Chart("chartWaroeng");
-        };
-    </script>
-@endsection
+                    {{--$.each(data, function (d, i) {--}}
+                        {{--items.push({--}}
+                            {{--y: parseInt(i.v),--}}
+                            {{--name: i.name--}}
+                        {{--});--}}
+                    {{--});--}}
+                {{--})--}}
+                    {{--.done(function () {--}}
+                        {{--idr.render()--}}
+                    {{--});--}}
+            {{--};--}}
+            {{--return {--}}
+                {{--Chart: function (id) {--}}
+                    {{--initChart(id)--}}
+                {{--}--}}
+            {{--}--}}
+        {{--}();--}}
+        {{--window.onload = function() {--}}
+            {{--G9.Chart("chartArea");--}}
+            {{--G9.Chart("chartWaroeng");--}}
+        {{--};--}}
+    {{--</script>--}}
+{{--@endsection--}}
+
+

@@ -107,7 +107,7 @@ class LaporanController extends Controller
             ->responsive(false)
             ->groupBy('area_nama');
 
-        return view('laporan::kategori', compact('data'));
+        return view('laporan::kategori', compact('data', 'kategori'));
     }
     public function create()
     {
