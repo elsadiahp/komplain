@@ -149,11 +149,8 @@
                   </div>
                 </div>
                 <!-- /.row-->
-                <div class="chart-wrapper" style="height:300px;margin-top:40px;">
-                  <canvas class="chart" id="main-chart" height="300"></canvas>
-                </div>
+
               </div>
-            </div>
             </div>
             <!-- /.row-->
           </div>

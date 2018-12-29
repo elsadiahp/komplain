@@ -1,9 +1,8 @@
 @extends('back-end.app')
 
 @section('content')
-    <h1>Area</h1>
-    <br>
 <div class="container">
+    <h1>Area</h1>
     <div class="row">
         <div class="col-md-12">
             @if (Session::has('success'))
@@ -15,10 +14,9 @@
                     <strong>Delete! </strong>{{ Session::get('delete')}}
                 </div>                    
             @endif
-                <br>
-            <a href="{{ route('area.create')}}" class="btn btn-primary btn-sm pull-right" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>
-                <br>
-                <br>
+            <a href="{{ route('area.create')}}" class="btn btn-primary" style="margin-button:20px;"><span class="glyphicon glyphicon-plus"> Tambah</span></a>   
+            <br>
+            <br>
             <table class="table table-striped">
                 <thead>
                     <tr>

@@ -2,7 +2,6 @@
 
 @section('content')
     <h1>Kategori</h1>
-    <br>
     @if (Session::has('success'))
         <div class="alert alert-success">
             <strong>Success! </strong>{{ Session::get('success')}}
@@ -12,7 +11,6 @@
             <strong>Delete! </strong>{{ Session::get('delete')}}
         </div>
     @endif
-    <br>
     <a href="{{route('tambah.kategori')}}" class="btn btn-primary">Tambah</a>
     <br>
     <br>

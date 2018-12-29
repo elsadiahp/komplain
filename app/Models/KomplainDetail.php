@@ -45,6 +45,6 @@ class KomplainDetail extends Eloquent
 
 	public function komplain()
 	{
-		return $this->belongsTo(\App\Models\Komplain::class);
+		return $this->belongsTo(\App\Models\Komplain::class, 'komplain_id');
 	}
 }

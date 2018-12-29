@@ -32,6 +32,6 @@ class Area extends Eloquent
 
 	public function waroengs()
 	{
-		return $this->hasMany(\App\Models\Waroeng::class);
+		return $this->hasMany(\App\Models\Waroeng::class,'waroeng_id');
 	}
 }

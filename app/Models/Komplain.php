@@ -35,26 +35,24 @@ class Komplain extends Eloquent
 		'waroeng_id' => 'int'
 	];
 
-	protected $dates = [
-		'tanggal_komplain',
-		'waktu_komplain'
-	];
-
 	protected $fillable = [
 		'waroeng_id',
 		'media_koplain',
 		'isi_komplain',
+		'status',
+		'keterangan',
 		'tanggal_komplain',
 		'waktu_komplain'
 	];
 
 	public function waroeng()
 	{
-		return $this->belongsTo(\App\Models\Waroeng::class);
+		return $this->belongsTo(\App\Models\Waroeng::class, 'waroeng_id');
 	}
 
 	public function komplain_details()
 	{
-		return $this->hasMany(\App\Models\KomplainDetail::class);
+		return $this->hasMany(\App\Models\KomplainDetail::class, 'komplain_id');
 	}
+
 }

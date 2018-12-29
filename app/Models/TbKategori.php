@@ -34,4 +34,5 @@ class TbKategori extends Eloquent
 	{
 		return $this->hasMany(\App\Models\KomplainDetail::class, 'id_kategori');
 	}
+	
 }

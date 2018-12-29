@@ -41,11 +41,11 @@ class Waroeng extends Eloquent
 
 	public function area()
 	{
-		return $this->belongsTo(\App\Models\Area::class);
+		return $this->belongsTo(\App\Models\Area::class,'area_id');
 	}
 
 	public function komplains()
 	{
-		return $this->hasMany(\App\Models\Komplain::class);
+		return $this->hasMany(\App\Models\Komplain::class, 'komplain_id');
 	}
 }

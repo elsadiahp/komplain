@@ -2,7 +2,6 @@
 
 @section('content')
     <h1>Waroeng</h1>
-    <br>
     @if (Session::has('success'))
         <div class="alert alert-success">
             <strong>Success! </strong>{{ Session::get('success')}}
@@ -12,7 +11,6 @@
             <strong>Delete! </strong>{{ Session::get('delete')}}
         </div>
     @endif
-    <br>
     <a href="{{route('tambah.waroeng')}}" class="btn btn-primary">Tambah</a>
     <br>
     <br>
@@ -38,8 +36,8 @@
                 <td>{{$waroeng->waroeng_nama}}</td>
                 <td>{{$waroeng->waroeng_alamat}}</td>
                 <td>{{$waroeng->area->area_nama}}</td>
-                <td align="right"><a href="{{route('edit.waroeng', $waroeng->waroeng_id)}}" class="btn btn-success btn-sm">Edit</a></td>
-                <td align="left">
+                <td textalign="right"><a href="{{route('edit.waroeng', $waroeng->waroeng_id)}}" class="btn btn-success btn-sm">Edit</a></td>
+                <td textalign="left">
                     <form action="{{route('destroy.waroeng', $waroeng->waroeng_id)}}" method="POST">
                         @csrf
                         @method('DELETE')

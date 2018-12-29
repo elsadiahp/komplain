@@ -14,8 +14,9 @@
                     </div>
                 @endif
                 <h1>Komplain</h1>
-                <a href="{{ route('komplain.create')}}" class="btn btn-primary btn-sm pull-right marginBottom20px"><span
-                        class="glyphicon glyphicon-plus"> Tambah</span></a>
+                <a href="{{ route('komplain.create')}}" class="btn btn-primary">Tambah</a>
+                <br>
+                <br>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -26,6 +27,8 @@
                         <th>Isi Komplain</th>
                         <th>Tanggal Komplain</th>
                         <th>Waktu Komplain</th>
+                        <th>Status</th>
+                        <th>Keterangan</th>
                         <th colspan="2" style="text-align:center;">Action</th>
                     </tr>
                     <tbody>
@@ -42,25 +45,34 @@
                                         @if ($detail_komplain->komplain_id === $key->komplain_id)
                                             @foreach ($data->kategori as $kategori)
                                                 @if ($kategori->id_kategori === $detail_komplain->id_kategori)
-                                                    <span
-                                                        class="label label-info">{{ $kategori->nama_kategori . ',' }}</span>
+                                                    <span class="label label-primary">{{$kategori->nama_kategori}}</span>
                                                 @endif
                                             @endforeach
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{$key->waroeng->waroeng_nama}}</td>
+                                <td>{{$key->waroeng_nama}}</td>
                                 <td>{{$key->media_koplain}}</td>
                                 <td>{{$key->isi_komplain}}</td>
                                 <td>{{$key->tanggal_komplain}}</td>
                                 <td>{{$key->waktu_komplain}}</td>
+                                {{-- <td width="150px">
+                                    <form action="{{route('komplain.status', $key->komplain_id)}}"method="POST">
+                                        <select name="status" class="form-control detail" onchange="this.form.submit();" >
+                                            <option value="{{$key->status}}">{{$key->status}}</option>
+                                            <option value="Selesai">Selesai</option>
+                                            <option value="Butuh Tindak Lanjut">Butuh Tindak Lanjut</option>
+                                        </select>
+                                    </form>
+                                </td> --}}
+                                <td>{{$key->status}}</td>
+                                <td>{{$key->keterangan}}</td>
                                 <td>
                                     <a href="{{ route('komplain.edit',['id'=>$key->komplain_id])}}"
                                        class="btn btn-success btn-sm">Edit</a>
                                 </td>
                                 <td>
-                                    <form action="{{route('komplain.destroy',['id'=>$key->komplain_id])}}"
-                                          method="POST">
+                                    <form action="{{route('komplain.destroy',['id'=>$key->komplain_id])}}"method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger btn-sm" type="submit">Delete</button>
@@ -72,22 +84,10 @@
                     </tbody>
                 </table>
             </div>
-
-
-            <div class="col-md-12">
-                <div class="col-md-12">
-                    <div id="chartWaroeng" style="height: 370px; width: 100%;"
-                         url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>
-                </div>
-                <div class="col-md-12">
-                    <div id="chartArea" style="height: 370px; width: 100%;"
-                         url="{{route('komplain.chart', ['p'=>'area_id'])}}" title="Area"></div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
-@section('js')
+{{-- @section('js')
 
     <script type="text/javascript" src="//canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script type="text/javascript">
@@ -143,4 +143,4 @@
             G9.Chart("chartWaroeng");
         };
     </script>
-@endsection
+@endsection --}}

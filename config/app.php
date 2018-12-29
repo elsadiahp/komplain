@@ -179,10 +179,11 @@ return [
         //Reliese Code:model
         Reliese\Coders\CodersServiceProvider::class,
 
-
         //chart
         ConsoleTVs\Charts\ChartsServiceProvider::class,
-
+        
+        //zizaco-entrust
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
 
     ],
@@ -236,6 +237,9 @@ return [
 
         //chart
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+
+        //zizaco-entrust
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
 
     ],
