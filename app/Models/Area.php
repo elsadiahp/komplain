@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 22 Dec 2018 07:50:13 +0000.
+ * Date: Sun, 30 Dec 2018 09:38:12 +0000.
  */
 
 namespace App\Models;
@@ -23,7 +23,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class Area extends Eloquent
 {
-	protected $table = 'area';
 	protected $primaryKey = 'area_id';
 
 	protected $fillable = [
@@ -32,6 +31,6 @@ class Area extends Eloquent
 
 	public function waroengs()
 	{
-		return $this->hasMany(\App\Models\Waroeng::class);
+		return $this->hasMany(\App\Models\Waroeng::class, 'waroeng_area_id');
 	}
 }

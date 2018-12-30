@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateKomplainTableKolomIdkategori extends Migration
+class CreateBagiansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class UpdateKomplainTableKolomIdkategori extends Migration
      */
     public function up()
     {
-        Schema::table('komplain', function (Blueprint $table){
-            $table->dropForeign(['id_kategori']);
-            $table->dropColumn('id_kategori');
+        Schema::create('bagians', function (Blueprint $table) {
+            $table->increments('bagian_id');
+            $table->string('bagian_nama');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class UpdateKomplainTableKolomIdkategori extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('bagians');
     }
 }

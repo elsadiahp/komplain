@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNewColumnOnKomplainTable extends Migration
+class CreateMediasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddNewColumnOnKomplainTable extends Migration
      */
     public function up()
     {
-        Schema::table('komplain', function (Blueprint $table) {
-            $table->dropColumn('tanggal_jam_komplain');
-            $table->date('tanggal_komplain')->after('isi_komplain');
-            $table->time('waktu_komplain')->after('tanggal_komplain');
+        Schema::create('medias', function (Blueprint $table) {
+            $table->increments('media_id');
+            $table->string('media_nama');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class AddNewColumnOnKomplainTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('medias');
     }
 }

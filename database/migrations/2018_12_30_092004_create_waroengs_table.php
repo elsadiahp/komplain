@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWaroengTable extends Migration
+class CreateWaroengsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateWaroengTable extends Migration
      */
     public function up()
     {
-        Schema::create('waroeng', function (Blueprint $table) {
+        Schema::create('waroengs', function (Blueprint $table) {
             $table->increments('waroeng_id');
+            $table->unsignedInteger('waroeng_area_id');
             $table->string('waroeng_nama');
-            $table->string('waroeng_alamat');
-            $table->unsignedInteger('area_id');
-            $table->foreign('area_id')->references('area_id')->on('area');
+            $table->text('waroeng_alamat');
+            $table->foreign('waroeng_area_id')
+                ->references('area_id')->on('areas')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateWaroengTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('waroeng');
+        Schema::dropIfExists('waroengs');
     }
 }
