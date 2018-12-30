@@ -16,8 +16,8 @@ class CreateKategorisTable extends Migration
         Schema::create('kategoris', function (Blueprint $table) {
             $table->increments('kategori_id');
             $table->unsignedInteger('kategori_parent_id')->nullable();
-            $table->unsignedInteger('kategori_bagian_id');
-            $table->string('kategori_bagian_nama');
+            $table->unsignedInteger('kategori_bagian_id')->nullable();
+            $table->string('kategori_nama');
             $table->foreign('kategori_parent_id')
                   ->references('kategori_id')->on('kategoris')
                   ->onUpdate('cascade')->onDelete('cascade');
