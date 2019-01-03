@@ -23,18 +23,18 @@
 
 
                     {{--<div class="form-group">--}}
-                        {{--<label for="id_kategori">Nama Kategori </label>--}}
-                        {{--<select id="kategori" name="id_kategori[]" class="form-control detail" multiple="multiple">--}}
-                            {{--@foreach ($data->detail_komplain as $detail_komplain)--}}
-                                {{--@if($detail_komplain->komplian_id === $data->komplain->komplain_id)--}}
-                                    {{--@foreach()--}}
-                                    {{--<option selected value="{{$detail_komplain->detail_komplain_id}}">{{$detail_komplain->detail_komplain_id}}</option>--}}
-                                {{--@else--}}
-                                    {{--<option value="{{$detail_komplain->detail_komplain_id}}">{{$detail_komplain->detail_komplain_id}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--@endif--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
+                    {{--<label for="id_kategori">Nama Kategori </label>--}}
+                    {{--<select id="kategori" name="id_kategori[]" class="form-control detail" multiple="multiple">--}}
+                    {{--@foreach ($data->detail_komplain as $detail_komplain)--}}
+                    {{--@if($detail_komplain->komplian_id === $data->komplain->komplain_id)--}}
+                    {{--@foreach()--}}
+                    {{--<option selected value="{{$detail_komplain->detail_komplain_id}}">{{$detail_komplain->detail_komplain_id}}</option>--}}
+                    {{--@else--}}
+                    {{--<option value="{{$detail_komplain->detail_komplain_id}}">{{$detail_komplain->detail_komplain_id}}</option>--}}
+                    {{--@endforeach--}}
+                    {{--@endif--}}
+                    {{--@endforeach--}}
+                    {{--</select>--}}
                     {{--</div>--}}
 
                     <div class="form-group">
@@ -43,16 +43,20 @@
                                 multiple="multiple">
                             @foreach ($data->detail_komplain as $detail_komplain)
                                 @if ($detail_komplain->komplain_id === $data->komplain->komplain_id)
-                                    @foreach ($data->detail_kategori as $kategori)
-                                        @if ($kategori->kategori_detail_id === $detail_komplain->kategori_detail_id)
-                                            <option selected
-                                                    value="{{$kategori->kategori_detail_id}}">{{ $kategori->kategori_detail_nama}}</option>
+                                    @foreach($data->kategori as $kategori)
+                                        @if($kategori->id_kategori === $detail_komplain->id_kategori)
+                                                <option selected
+                                                        value="{{$kategori->id_kategori}}">{{$kategori->nama_kategori}}</option>
                                         @else
-                                            <option
-                                                value="{{$kategori->kategori_detail_id}}">{{ $kategori->kategori_detail_nama}}</option>
+                                            @if($kategori->id_kategori_parent !== null)
+                                                <option
+                                                    value="{{$kategori->id_kategori}}">{{$kategori->nama_kategori}}</option>
+                                            @endif
+
+
                                         @endif
                                     @endforeach
-                                @endif
+                                        @endif
                             @endforeach
                         </select>
                     </div>

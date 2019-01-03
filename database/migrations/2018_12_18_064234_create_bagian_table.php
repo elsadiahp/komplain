@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNewColumnKomplainDetailTable extends Migration
+class CreateBagianTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class AddNewColumnKomplainDetailTable extends Migration
      */
     public function up()
     {
-        Schema::table('komplain_detail', function (Blueprint $table){
-            $table->unsignedInteger('kategori_detail_id')->after('komplain_id');
-            $table->foreign('kategori_detail_id')->references('kategori_detail_id')->on('kategori_detail');
+        Schema::create('bagian', function (Blueprint $table) {
+            $table->increments('bagian_id');
+            $table->string('bagian_nama');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class AddNewColumnKomplainDetailTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('bagian');
     }
 }

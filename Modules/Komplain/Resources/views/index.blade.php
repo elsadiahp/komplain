@@ -14,16 +14,17 @@
                     </div>
                 @endif
                 <h1>Komplain</h1>
-                    <br>
+                <br>
                 <a href="{{ route('komplain.create')}}" class="btn btn-primary btn-sm pull-left marginBottom20px"><span
                         class="glyphicon glyphicon-plus"> Tambah</span></a>
-                    <br>
-                    <br>
-                <table class="table table-bordered">
+                <br>
+                <br>
+                <table class="table table-striped">
                     <thead>
                     <tr>
                         <th width="10">No</th>
-                        <th>Kategori</th>
+                        <th>Bagian</th>
+                        <th>Parent Kategori</th>
                         <th>Kategori Detail</th>
                         <th>Waroeng</th>
                         <th>Media Komplain</th>
@@ -43,14 +44,28 @@
                                 <td>{{$no++}}</td>
                                 <td>
                                     @foreach ($data->detail_komplain as $detail_komplain)
-                                        @if ($detail_komplain->komplain_id === $key->komplain_id)
-                                            @foreach ($data->detail_kategori as $kategori)
-                                                @if ($kategori->kategori_detail_id === $detail_komplain->kategori_detail_id)
-                                                    @foreach($data->kategori as $kat)
-                                                        @if($kat->id_kategori === $kategori->id_kategori)
-                                                             <span class="label label-info">{{ $kat->nama_kategori . ',' }}</span>
-                                                        @endif
-                                                    @endforeach
+                                        @if($detail_komplain->komplain_id === $key->komplain_id)
+                                            @foreach($data->kategori as $kategori)
+                                                @if($kategori->id_kategori === $detail_komplain->id_kategori)
+{{--                                                    @if($kategori->id_kategori_parent === $kategori->id_kategori)--}}
+                                                    {{--@php(dd($kategori));--}}
+
+                                                    <span>{{$kategori->id_kategori_parent. ','}}</span>
+                                                    {{--@endif--}}
+
+                                                @endif
+                                                @endforeach
+                                            @endif
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($data->detail_komplain as $detail_komplain)
+                                        @if($detail_komplain->komplain_id === $key->komplain_id)
+                                            @foreach($data->kategori as $kategori)
+                                                @if($kategori->id_kategori === $detail_komplain->id_kategori)
+                                                        <span>{{$kategori->id_kategori_parent. ','}}</span>
+
+
                                                 @endif
                                             @endforeach
                                         @endif
@@ -58,11 +73,12 @@
                                 </td>
                                 <td>
                                     @foreach ($data->detail_komplain as $detail_komplain)
-                                        @if ($detail_komplain->komplain_id === $key->komplain_id)
-                                            @foreach ($data->detail_kategori as $kategori)
-                                                @if ($kategori->kategori_detail_id === $detail_komplain->kategori_detail_id)
-                                                    <span
-                                                        class="label label-info">{{ $kategori->kategori_detail_nama . ',' }}</span>
+                                        @if($detail_komplain->komplain_id === $key->komplain_id)
+                                            @foreach($data->kategori as $sub)
+                                                @if($sub->id_kategori === $detail_komplain->id_kategori)
+                                                    @if($sub->id_kategori_parent !== null)
+                                                        <span>{{$sub->nama_kategori. ','}}</span>
+                                                    @endif
                                                 @endif
                                             @endforeach
                                         @endif
@@ -94,74 +110,74 @@
 
 
             {{--<div class="col-md-12">--}}
-                {{--<div class="col-md-12">--}}
-                    {{--<div id="chartWaroeng" style="height: 370px; width: 100%;"--}}
-                         {{--url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>--}}
-                {{--</div>--}}
-                {{--<div class="col-md-12">--}}
-                    {{--<div id="chartArea" style="height: 370px; width: 100%;"--}}
-                         {{--url="{{route('komplain.chart', ['p'=>'area_id'])}}" title="Area"></div>--}}
-                {{--</div>--}}
+            {{--<div class="col-md-12">--}}
+            {{--<div id="chartWaroeng" style="height: 370px; width: 100%;"--}}
+            {{--url="{{route('komplain.chart',['p'=>'waroeng_id'])}}" title="Waroeng"></div>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-12">--}}
+            {{--<div id="chartArea" style="height: 370px; width: 100%;"--}}
+            {{--url="{{route('komplain.chart', ['p'=>'area_id'])}}" title="Area"></div>--}}
+            {{--</div>--}}
             {{--</div>--}}
         </div>
     </div>
 @endsection
 {{--@section('js')--}}
 
-    {{--<script type="text/javascript" src="//canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>--}}
-    {{--<script type="text/javascript">--}}
-        {{--var G9 = function () {--}}
-            {{--var initChart = function (id) {--}}
-                {{--var items = [];--}}
-                {{--$id1 = $('#' + id);--}}
-                {{--var idr = id;--}}
-                {{--idr = new CanvasJS.Chart(id, {--}}
-                    {{--exportEnabled: true,--}}
-                    {{--animationEnabled: true,--}}
-                    {{--title: {--}}
-                        {{--text: $id1.attr('title')--}}
-                    {{--},--}}
-                    {{--legend: {--}}
-                        {{--horizontalAlign: "right",--}}
-                        {{--verticalAlign: "center"--}}
-                    {{--},--}}
-                    {{--data: [{--}}
-                        {{--type: "pie",--}}
-                        {{--showInLegend: true,--}}
-                        {{--percentFormatString: "#",--}}
-                        {{--toolTipContent: "<b>{name}</b>: Total {y} - #percent %",--}}
-                        {{--indexLabel: "(#percent%)",--}}
-                        {{--legendText: "{name} Total {y} (#percent%)",--}}
-                        {{--dataPoints: items--}}
-                    {{--}]--}}
-                {{--});--}}
+{{--<script type="text/javascript" src="//canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>--}}
+{{--<script type="text/javascript">--}}
+{{--var G9 = function () {--}}
+{{--var initChart = function (id) {--}}
+{{--var items = [];--}}
+{{--$id1 = $('#' + id);--}}
+{{--var idr = id;--}}
+{{--idr = new CanvasJS.Chart(id, {--}}
+{{--exportEnabled: true,--}}
+{{--animationEnabled: true,--}}
+{{--title: {--}}
+{{--text: $id1.attr('title')--}}
+{{--},--}}
+{{--legend: {--}}
+{{--horizontalAlign: "right",--}}
+{{--verticalAlign: "center"--}}
+{{--},--}}
+{{--data: [{--}}
+{{--type: "pie",--}}
+{{--showInLegend: true,--}}
+{{--percentFormatString: "#",--}}
+{{--toolTipContent: "<b>{name}</b>: Total {y} - #percent %",--}}
+{{--indexLabel: "(#percent%)",--}}
+{{--legendText: "{name} Total {y} (#percent%)",--}}
+{{--dataPoints: items--}}
+{{--}]--}}
+{{--});--}}
 
-                {{--$.get($id1.attr('url'), function (data) {--}}
+{{--$.get($id1.attr('url'), function (data) {--}}
 
-                {{--}).then(function (data) {--}}
+{{--}).then(function (data) {--}}
 
-                    {{--$.each(data, function (d, i) {--}}
-                        {{--items.push({--}}
-                            {{--y: parseInt(i.v),--}}
-                            {{--name: i.name--}}
-                        {{--});--}}
-                    {{--});--}}
-                {{--})--}}
-                    {{--.done(function () {--}}
-                        {{--idr.render()--}}
-                    {{--});--}}
-            {{--};--}}
-            {{--return {--}}
-                {{--Chart: function (id) {--}}
-                    {{--initChart(id)--}}
-                {{--}--}}
-            {{--}--}}
-        {{--}();--}}
-        {{--window.onload = function() {--}}
-            {{--G9.Chart("chartArea");--}}
-            {{--G9.Chart("chartWaroeng");--}}
-        {{--};--}}
-    {{--</script>--}}
+{{--$.each(data, function (d, i) {--}}
+{{--items.push({--}}
+{{--y: parseInt(i.v),--}}
+{{--name: i.name--}}
+{{--});--}}
+{{--});--}}
+{{--})--}}
+{{--.done(function () {--}}
+{{--idr.render()--}}
+{{--});--}}
+{{--};--}}
+{{--return {--}}
+{{--Chart: function (id) {--}}
+{{--initChart(id)--}}
+{{--}--}}
+{{--}--}}
+{{--}();--}}
+{{--window.onload = function() {--}}
+{{--G9.Chart("chartArea");--}}
+{{--G9.Chart("chartWaroeng");--}}
+{{--};--}}
+{{--</script>--}}
 {{--@endsection--}}
 
 

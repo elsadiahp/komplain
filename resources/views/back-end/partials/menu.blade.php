@@ -16,11 +16,7 @@
                     <i class="nav-icon icon-speedometer"></i> Kategori
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('dkategori.index')}}">
-                    <i class="nav-icon icon-speedometer"></i> Detail Kategori
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('waroeng.index')}}">
                     <i class="nav-icon icon-speedometer"></i> Waroeng

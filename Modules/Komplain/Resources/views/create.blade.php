@@ -7,28 +7,38 @@
                 <form action="{{route('komplain.store')}}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="id_kategori">Nama Kategori </label>
-                        <select name="id_kategori[]" class="form-control detail" multiple="multiple">
-                            <option value="">--Pilih Nama Kategori--</option>
-                            @foreach($data->kategori as $kat)
-                                <option value="{{$kat->id_kategori}}">{{$kat->nama_kategori}}</option>
+                        <label for="bagian">Nama Bagian </label>
+                        <select name="bagian[]" class="form-control detail" multiple="multiple" required>
+                            <option value="">--Pilih Nama Bagian--</option>
+                            @foreach($data->bagian as $bag)
+                                <option value="{{$bag->bagian_id}}">{{$bag->bagian_nama}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="kategori_detail_id">Nama Detail Kategori </label>
-                        <select name="kategori_detail_id[]" class="form-control detail" multiple="multiple">
-                            <option value="">--Pilih Nama Detail Kategori--</option>
-                            @foreach($data->detail_kategori as $dkat)
-                                <option value="{{$dkat->kategori_detail_id}}">{{$dkat->kategori_detail_nama}}</option>
+                        <label for="parent">Nama Kategori </label>
+                        <select name="parent[]" class="form-control detail" multiple="multiple" required>
+                            <option value="">--Pilih Nama Kategori--</option>
+                            @foreach($data->kategori as $dkat)
+                                <option value="{{$dkat->id_kategori}}">{{$dkat->nama_kategori}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kategori">Nama Sub Kategori </label>
+                        <select name="kategori[]" class="form-control detail" multiple="multiple" required>
+                            <option value="">--Pilih Nama Sub Kategori--</option>
+                            @foreach($data->sub as $sub)
+                                <option value="{{$sub->id_kategori}}">{{$sub->nama_kategori}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="waroeng_id">Waroeng</label>
-                        <select class="selection form-control" id="waroeng_id" name="waroeng_id">
+                        <select class="selection form-control" id="waroeng_id" name="waroeng_id" required>
                             <option value="">-</option>
                         @foreach ($data->waroeng as $key)
                             <option value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>
@@ -38,21 +48,21 @@
 
                     <div class="form-group">
                         <label for="media_komplain">Media Komplain</label>
-                        <input type="text" class="form-control" id="media_komplain" name="media_komplain">
+                        <input type="text" class="form-control" id="media_komplain" name="media_komplain" required>
                     </div>
                     <div class="form-group">
                         <label for="isi_komplain">Isi Komplain</label>
-                        <textarea name="isi_komplain" id="isi_komplain" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="isi_komplain" id="isi_komplain" cols="30" rows="10" class="form-control" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="tanggal_komplain">Tanggal Komplain</label>
-                        <input class="form-control" name="tanggal_komplain" type="date" value="{{date('m/d/Y')}}">
+                        <input class="form-control" name="tanggal_komplain" type="date" value="{{date('m/d/Y')}}" required>
                     </div>
 
                     <div class="form-group">
                         <label for="tanggal_jam_komplain">Waktu Komplain</label>
-                        <input class="form-control" name="waktu_komplain" type="time" value="{{date('H:i')}}">
+                        <input class="form-control" name="waktu_komplain" type="time" value="{{date('H:i')}}" required>
                     </div>
 
                     <div class="form-group">

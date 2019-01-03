@@ -265,10 +265,6 @@ return [
             'migrations',
             'users',
             'password_resets',
-            'permissions',
-            'permission_role',
-            'roles',
-            'role_user'
         ],
     ],
 

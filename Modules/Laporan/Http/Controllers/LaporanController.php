@@ -73,11 +73,12 @@ class LaporanController extends Controller
         $data = new \stdClass();
 
         $data->are = Area::get();
-
         $data->a = $request->get('area_id');
+        $tampil = DB::table('area')->where('area_id', '=', $data->a)->first();
+
         $area = DB::table('komplain')->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
             ->join('area', 'waroeng.area_id', '=', 'area.area_id')
-            ->where('area.area_id', 'like', '%%' . $data->a . '%%')->get();
+            ->where('area.area_id',  '=' , $data->a)->get();
         $data->area = Charts::database($area, 'bar', 'highcharts')
             ->elementLabel("Komplain Berdasarkan Waroeng ")
             ->title('Total Komplain Berdasarkan Waroeng')
@@ -85,7 +86,7 @@ class LaporanController extends Controller
             ->responsive(false)
             ->groupBy('waroeng_nama');
 
-        return view('laporan::area', compact('data'));
+        return view('laporan::area', compact('data', 'tampil'));
     }
 
 
@@ -94,12 +95,17 @@ class LaporanController extends Controller
 
          $data = new \stdClass();
 
-        $data->k = $request->get('id_kategori');
+         $kat = TbKategori::all();
+         $data->kat = DB::table('tb_kategori')->where('id_kategori_parent', '!=', 'null')->get();
+
+         $data->k = $request->get('kategori');
+         $kateg = DB::table('tb_kategori')->where('id_kategori', '=', $data->k)->first();
+
         $kategori = DB::table('tb_kategori')->join('komplain_detail', 'komplain_detail.id_kategori', '=', 'tb_kategori.id_kategori')
             ->join('komplain', 'komplain_detail.komplain_id', '=', 'komplain.komplain_id')
             ->join('waroeng', 'komplain.waroeng_id', '=', 'waroeng.waroeng_id')
             ->join('area', 'waroeng.area_id', '=', 'area.area_id')
-            ->where('tb_kategori.id_kategori', 'like', '%%' . $data->k . '%%')->get();
+            ->where('tb_kategori.id_kategori', '=', $data->k)->get();
         $data->kategori = Charts::database($kategori, 'bar', 'highcharts')
             ->elementLabel("Komplain Kategori Berdasarkan Area ")
             ->title('Total Komplain Kategori Berdasarkan Area')
@@ -107,7 +113,7 @@ class LaporanController extends Controller
             ->responsive(false)
             ->groupBy('area_nama');
 
-        return view('laporan::kategori', compact('data', 'kategori'));
+        return view('laporan::kategori', compact('data', 'kategori', 'kat', 'kateg'));
     }
     public function create()
     {

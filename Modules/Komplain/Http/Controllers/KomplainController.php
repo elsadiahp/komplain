@@ -3,6 +3,7 @@
 namespace Modules\Komplain\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Bagian;
 use App\Models\KategoriDetail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,19 +26,19 @@ class KomplainController extends Controller
     public function index()
     {
         $data = new \stdClass();
-        $data->detail_komplain = KomplainDetail::with(['kategori_detail', 'komplain'])->get();
-        $data->kategori = TbKategori::All();
-        $data->detail_kategori = KategoriDetail::All();
-
+        $data->detail_komplain = KomplainDetail::with(['komplain', 'tb_kategori', ])->get();
+        $data->kat =DB::table('tb_kategori')->where('id_kategori_parent', '=', null)->get();
+        $data->kategori = TbKategori::all();
+//        $data->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
+        $data->bagian = Bagian::all();
 
         $data->komplain = DB::table('komplain')
             ->join('waroeng', 'waroeng.waroeng_id', '=', 'komplain.waroeng_id')
             ->join('komplain_detail', 'komplain.komplain_id', '=', 'komplain_detail.komplain_id')
-            ->join('kategori_detail', 'kategori_detail.kategori_detail_id', '=', 'komplain_detail.kategori_detail_id')
+//            ->join('kategori_detail', 'kategori_detail.kategori_detail_id', '=', 'komplain_detail.kategori_detail_id')
             ->groupBy('komplain.komplain_id')
             ->get();
         $no = 1;
-
 
         return view('komplain::index', compact('data', 'no'));
 
@@ -48,10 +49,13 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
-        $data->kategori = TbKategori::all();
+        $data->kategori = DB::table('tb_kategori')->where('id_kategori_parent', '=', null)->get();
         $data->detail_komplain = KomplainDetail::all();
-        $data->detail_kategori = KategoriDetail::all();
-        return view('komplain::create', compact('data', 'kategori'));
+        $data->bagian = Bagian::all();
+        $data->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
+
+//        $data->detail_kategori = KategoriDetail::all();
+        return view('komplain::create', compact('data'));
     }
 
     public function store(Request $request)
@@ -66,12 +70,13 @@ class KomplainController extends Controller
         $komplain->save();
 
 
-//        menyimpan kategori_detail_id di tabel komplain_detail
-        $tag = $request->kategori_detail_id;
+//        menyimpan id_kategori di tabel komplain_detail
+        $tag = $request->kategori;
+//       dd($tag);
         foreach ($tag as $tags) {
             $detail_komplain = new KomplainDetail();
             $detail_komplain->komplain_id = $komplain->komplain_id;
-            $detail_komplain->kategori_detail_id = $tags;
+            $detail_komplain->id_kategori = $tags;
             $detail_komplain->save();
         }
 
@@ -98,8 +103,10 @@ class KomplainController extends Controller
         $data->komplain = Komplain::find($id);
         $data->waroeng = Waroeng::all();
         $data->kategori = TbKategori::all();
-        $data->detail_kategori = KategoriDetail::all();
+//        $data->detail_kategori = KategoriDetail::all();
         $data->detail_komplain = KomplainDetail::all();
+        $data->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
+
 
         return view('komplain::edit', compact('data'));
 
@@ -127,12 +134,12 @@ class KomplainController extends Controller
             foreach ($request->kategori_detail_id as $k) {
                 $detail = KomplainDetail::where([
                     ['komplain_id', $id],
-                    ['kategori_detail_id', $k]
+                    ['id_kategori', $k]
                 ])->get();
 
                 if ($detail) {
                     $d = new KomplainDetail;
-                    $d->kategori_detail_id = $k;
+                    $d->id_kategori = $k;
                     $d->komplain_id = $id;
                     $d->save();
                 }

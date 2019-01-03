@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +237,8 @@ return [
 
         //chart
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
 
     ],

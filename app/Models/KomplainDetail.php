@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Dec 2018 06:47:06 +0000.
+ * Date: Thu, 03 Jan 2019 03:49:00 +0000.
  */
 
 namespace App\Models;
@@ -13,12 +13,12 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class KomplainDetail
  * 
  * @property int $komplain_detail_id
+ * @property int $id_kategori
  * @property int $komplain_id
- * @property int $kategori_detail_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
- * @property \App\Models\KategoriDetail $kategori_detail
+ * @property \App\Models\TbKategori $tb_kategori
  * @property \App\Models\Komplain $komplain
  *
  * @package App\Models
@@ -29,18 +29,18 @@ class KomplainDetail extends Eloquent
 	protected $primaryKey = 'komplain_detail_id';
 
 	protected $casts = [
-		'komplain_id' => 'int',
-		'kategori_detail_id' => 'int'
+		'id_kategori' => 'int',
+		'komplain_id' => 'int'
 	];
 
 	protected $fillable = [
-		'komplain_id',
-		'kategori_detail_id'
+		'id_kategori',
+		'komplain_id'
 	];
 
-	public function kategori_detail()
+	public function tb_kategori()
 	{
-		return $this->belongsTo(\App\Models\KategoriDetail::class);
+		return $this->belongsTo(\App\Models\TbKategori::class, 'id_kategori');
 	}
 
 	public function komplain()

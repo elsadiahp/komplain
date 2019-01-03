@@ -1,7 +1,12 @@
 @extends('back-end.app')
 
 @section('content')
-    <h1>Chart</h1>
+    @if($tampil !== null)
+        <h1>Chart Komplain {{$tampil->area_nama}}</h1>
+    @else
+        <h1>Chart Komplain Area</h1>
+    @endif
+
     <br>
     <div class="container">
         <div class="row">

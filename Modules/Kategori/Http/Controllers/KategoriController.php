@@ -2,10 +2,12 @@
 
 namespace Modules\Kategori\Http\Controllers;
 
+use App\Models\Bagian;
+use App\Models\TbKategori;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Kategori;
+use Illuminate\Support\Facades\DB;
 use Redirect;
 use Session;
 
@@ -19,7 +21,8 @@ class KategoriController extends Controller
     public function index()
     {
         $kat = new \stdClass();
-        $kat->kat = Kategori::all();
+        $kat->kat = DB::table('tb_kategori as k')->join('bagian as b', 'b.bagian_id', '=', 'k.bagian_id')->get();
+        $kat->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
         $no = 1;
         return view('kategori::index', compact('kat', 'no'));
     }
@@ -30,7 +33,9 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('kategori::create');
+        $kat = TbKategori::all();
+        $bagian = Bagian::all();
+        return view('kategori::create', compact('kat', 'bagian'));
     }
 
     /**
@@ -40,8 +45,10 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $kat = new Kategori();
+        $kat = new TbKategori();
         $kat->nama_kategori = $request->kat;
+        $kat->id_kategori_parent = $request->parent_kat;
+        $kat->bagian_id = $request->bagian;
         $kat->save();
 
         Session::flash('success', $kat->nama_kategori . ' berhasil ditambahkan!');
@@ -64,8 +71,14 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategori = Kategori::find($id);
-        return view('kategori::edit', compact('kategori'));
+       $kat = TbKategori::with('tb_kategori')
+            ->where('id_kategori', $id)
+            ->first();
+        $kategori = TbKategori::join('bagian as b', 'b.bagian_id', '=', 'tb_kategori.bagian_id')->get();
+        $bagian = Bagian::all();
+        $sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
+
+        return view('kategori::edit', compact('kat', 'kategori', 'bagian', 'sub'));
     }
 
     /**
@@ -75,7 +88,10 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kategori = Kategori::find($id);
+
+        $kategori = TbKategori::find($id);
+        $kategori->bagian_id= $request->bagian;
+        $kategori->id_kategori_parent = $request->parent_kat;
         $kategori->nama_kategori = $request->kat;
         $kategori->save();
 
@@ -88,7 +104,7 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori = Kategori::find($id);
+        $kategori = TbKategori::find($id);
         $kategori->delete();
 
         Session::flash('delete', $kategori->nama_kategori . ' berhasil dihapus!');
