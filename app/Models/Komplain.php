@@ -35,10 +35,10 @@ class Komplain extends Eloquent
 		'waroeng_id' => 'int'
 	];
 
-	protected $dates = [
-		'tanggal_komplain',
-		'waktu_komplain'
-	];
+//	protected $dates = [
+//		'tanggal_komplain',
+//		'waktu_komplain'
+//	];
 
 	protected $fillable = [
 		'waroeng_id',

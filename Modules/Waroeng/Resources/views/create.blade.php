@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="alamat_waroeng" class="col-md-12 control-label">Alamat Waroeng</label>
                         <div class="col-md-12">
-                            <textarea name="alamat_waroeng" id="alamat_waroeng" cols="30" rows="10" class="form-control" placeholder="Masukkan Alamat waroeng"></textarea>
+                            <textarea name="alamat_waroeng" id="alamat_waroeng" cols="30" rows="10" class="form-control" placeholder="Masukkan Alamat waroeng" required></textarea>
                         </div>
                     </div>
 

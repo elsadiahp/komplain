@@ -39,6 +39,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('permission.index')}}">
+                    <i class="nav-icon icon-speedometer"></i> Permission
+                </a>
+            </li>
+
         </ul>
     </nav>
 </div>

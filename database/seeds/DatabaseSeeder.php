@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
              KategoriTableSeeder::class,
              KategoriDetailTableSeeder::class,
              KomplainTableSeeder::class,
-             KomplainDetailTableSeeder::class
+             KomplainDetailTableSeeder::class,
+             PermissionTableSeeder::class
          ]);
     }
 }

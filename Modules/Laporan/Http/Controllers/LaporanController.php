@@ -100,6 +100,10 @@ class LaporanController extends Controller
 
          $data->k = $request->get('kategori');
          $kateg = DB::table('tb_kategori')->where('id_kategori', '=', $data->k)->first();
+        $data->detail_komplain = KomplainDetail::with(['komplain', 'tb_kategori', ])->get();
+        $data->kateg = TbKategori::all();
+        $no = 1;
+
 
         $kategori = DB::table('tb_kategori')->join('komplain_detail', 'komplain_detail.id_kategori', '=', 'tb_kategori.id_kategori')
             ->join('komplain', 'komplain_detail.komplain_id', '=', 'komplain.komplain_id')
@@ -113,7 +117,7 @@ class LaporanController extends Controller
             ->responsive(false)
             ->groupBy('area_nama');
 
-        return view('laporan::kategori', compact('data', 'kategori', 'kat', 'kateg'));
+        return view('laporan::kategori', compact('data', 'kategori', 'kat', 'kateg', 'no'));
     }
     public function create()
     {
