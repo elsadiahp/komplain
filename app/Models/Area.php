@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 28 Dec 2018 01:21:27 +0000.
+ * Date: Tue, 01 Jan 2019 16:42:23 +0700.
  */
 
 namespace App\Models;
@@ -32,6 +32,6 @@ class Area extends Eloquent
 
 	public function waroengs()
 	{
-		return $this->hasMany(\App\Models\Waroeng::class,'waroeng_id');
+		return $this->hasMany(\App\Models\Waroeng::class);
 	}
 }

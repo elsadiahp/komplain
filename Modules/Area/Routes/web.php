@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('area')->group(function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'area'], function() {
     Route::get('/', 'AreaController@index')->name('area.index');
     Route::get('/create', 'AreaController@create')->name('area.create');
     Route::post('/store', 'AreaController@store')->name('area.store');

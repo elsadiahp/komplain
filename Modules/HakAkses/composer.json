@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/hakakses",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\HakAkses\\Providers\\HakAksesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\HakAkses\\": ""
+        }
+    }
+}

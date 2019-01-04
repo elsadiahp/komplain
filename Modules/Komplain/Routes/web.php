@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('komplain')->group(function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'komplain'], function() {
     Route::get('/', 'KomplainController@index')->name('komplain.index');
     Route::get('/create', 'KomplainController@create')->name('komplain.create');
     Route::post('/store', 'KomplainController@store')->name('komplain.store');
@@ -21,5 +21,4 @@ Route::prefix('komplain')->group(function() {
     Route::delete('/delete/{id}', 'KomplainController@destroy')->name('komplain.destroy');
 
     Route::get('/json-waroeng','KomplainController@waroeng')->name('komplain.select');
-
 });

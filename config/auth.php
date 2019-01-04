@@ -97,7 +97,7 @@ return [
             // 'table' => 'password_resets',
             // 'expire' => 60,
             'driver' => 'eloquent',
-            'model' => Namespace\Of\Your\User\Model\User::class,
+            'model' => App\Models\User::class,
             'table' => 'users',
         ],
     ],

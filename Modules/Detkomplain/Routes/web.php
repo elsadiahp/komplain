@@ -11,9 +11,8 @@
 |
 */
 
-Route::prefix('detkomplain')->group(function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'detkomplain'], function() {
     Route::get('/', 'DetkomplainController@index')->name('detkomplain.index');
-
     Route::get('create', 'DetkomplainController@create')->name('tambah.detkomplain');
     Route::get('store', 'DetkomplainController@store')->name('save.detkomplain');
 });

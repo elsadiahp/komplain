@@ -7,7 +7,7 @@
 * Licensed under MIT (https://coreui.io/license)
 -->
 
-<html lang="en">
+<html lang="id">
   <head>
     <base href="./">
     <meta charset="utf-8">

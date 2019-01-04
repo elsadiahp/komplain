@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Fri, 28 Dec 2018 01:21:27 +0000.
+ * Date: Tue, 01 Jan 2019 16:42:24 +0700.
  */
 
 namespace App\Models;
@@ -16,6 +16,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $waroeng_id
  * @property string $media_koplain
  * @property string $isi_komplain
+ * @property string $status
+ * @property string $keterangan
  * @property \Carbon\Carbon $tanggal_komplain
  * @property \Carbon\Carbon $waktu_komplain
  * @property \Carbon\Carbon $created_at
@@ -35,6 +37,11 @@ class Komplain extends Eloquent
 		'waroeng_id' => 'int'
 	];
 
+	// protected $dates = [
+	// 	'tanggal_komplain',
+	// 	'waktu_komplain'
+	// ];
+
 	protected $fillable = [
 		'waroeng_id',
 		'media_koplain',
@@ -47,12 +54,11 @@ class Komplain extends Eloquent
 
 	public function waroeng()
 	{
-		return $this->belongsTo(\App\Models\Waroeng::class, 'waroeng_id');
+		return $this->belongsTo(\App\Models\Waroeng::class);
 	}
 
 	public function komplain_details()
 	{
-		return $this->hasMany(\App\Models\KomplainDetail::class, 'komplain_id');
+		return $this->hasMany(\App\Models\KomplainDetail::class);
 	}
-
 }

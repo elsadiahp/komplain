@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tanggal_komplain">Tanggal Komplain</label>
-                        <input class="form-control" name="tanggal_komplain" type="date" value="{{date('m/d/Y')}}">
+                        <input class="form-control" name="tanggal_komplain" type="date">
                     </div>
                     <div class="form-group">
                         <label for="tanggal_jam_komplain">Waktu Komplain</label>

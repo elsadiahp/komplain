@@ -11,13 +11,11 @@
 |
 */
 
-Route::prefix('kategori')->group(function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'kategori'], function() {
     Route::get('/', 'KategoriController@index')->name('kategori.index');
     Route::get('/create', 'KategoriController@create')->name('tambah.kategori');
     Route::post('/store', 'KategoriController@store')->name('simpan.kategori');
-
     Route::get('/edit/{id_kategori}', 'KategoriController@edit')->name('edit.kategori');
     Route::put('/update/{id_kategori}', 'KategoriController@update')->name('update.kategori');
-
     Route::delete('/destroy/{id_kategori}', 'KategoriController@destroy')->name('destroy.kategori');
 });
