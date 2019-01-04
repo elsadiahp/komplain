@@ -33,9 +33,9 @@
 		<td>{{ $role->display_name }}</td>
 		<td>{{ $role->description }}</td>
 		<td>
-			<a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
+			<a class="btn btn-info btn-sm" href="{{ route('roles.show',$role->id) }}">Show</a>
 			{{-- @permission('role-edit') --}}
-			<a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+			<a class="btn btn-primary btn-sm" href="{{ route('roles.edit',$role->id) }}">Edit</a>
 			{{-- @endpermission --}}
 			{{-- @permission('role-delete') --}}
             <form action="{{route('roles.destroy',['id'=>$role->id])}}" method="POST" style="display: inline">

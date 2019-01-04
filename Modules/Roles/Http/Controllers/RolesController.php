@@ -80,7 +80,7 @@ class RolesController extends Controller
         // return $rolePermissions = DB::table("permission_role")->where("permission_role.role_id",$id)
         //     ->pluck('permission_role.permission_id','permission_role.permission_id');
         // $rolePermissions = PermissionRole::pluck('permission_id','role_id');
-        $rolePermissions = $role->permissions()->pluck('permission_id','role_id')->toArray();
+        $rolePermissions = $role->permissions()->pluck('permission_id','permission_id')->toArray();
 
 
         return view('roles::edit',compact('role','permission','rolePermissions'));
@@ -93,11 +93,11 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'display_name' => 'required',
-            'description' => 'required',
-            'permission' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'display_name' => 'required',
+        //     'description' => 'required',
+        //     'permission' => 'required',
+        // ]);
 
 
         $role = Role::find($id);
@@ -110,9 +110,13 @@ class RolesController extends Controller
                                     ->delete();
 
 
-        foreach ($request->input('permission') as $key) {
-                    $role->attachPermission($key);
-        }
+        // foreach ($request->input('permission') as $key) {
+        //             $role->attachPermission($key);
+        // }
+        $role_id = $role->id;
+
+        $role->permissions()->sync($request->permission, $role_id);
+
 
 
         return redirect()->route('roles.index')

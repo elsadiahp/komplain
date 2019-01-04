@@ -21,7 +21,7 @@
 			</ul>
 		</div>
 	@endif
-    <form action="{{route('roles.store')}}" method="POST" class="form-horizontal col-md-8">
+    <form action="{{route('roles.update', $role->id)}}" method="POST" class="form-horizontal col-md-8">
     @csrf
         <div class="row">
             <div class="col-md-12">
