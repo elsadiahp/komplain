@@ -61,17 +61,36 @@
                         </select>
                     </div>
 
+                    {{--<div class="form-group">--}}
+                        {{--<label for="waroeng_id">Waroeng</label>--}}
+                        {{--<select class="selection form-control" name="waroeng_id">--}}
+                            {{--<option value="">-</option>--}}
+                            {{--@foreach ($data->waroeng as $key)--}}
+                                {{--@if ($key->waroeng_id === $data->komplain->waroeng_id)--}}
+                                    {{--<option selected value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>--}}
+                                {{--@else--}}
+                                    {{--<option value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>--}}
+                                {{--@endif--}}
+                            {{--@endforeach--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
                     <div class="form-group">
-                        <label for="waroeng_id">Waroeng</label>
-                        <select class="selection form-control" name="waroeng_id">
-                            <option value="">-</option>
-                            @foreach ($data->waroeng as $key)
-                                @if ($key->waroeng_id === $data->komplain->waroeng_id)
-                                    <option selected value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>
+                        <label for="waroeng_id">Area</label>
+                        <select class="selection form-control area" id="area" name="area" value="{{$data->waroeng->area_id}}">
+                            <option value="0" disable="true" selected="true">-Pilih Area-</option>
+                            @foreach ($data->area as $key)
+                                @if ($key->area_id === $data->waroeng->area_id)
+                                    <option selected value="{{$key->area_id}}">{{$key->area_nama}}</option>
                                 @else
-                                    <option value="{{$key->waroeng_id}}">{{$key->waroeng_nama}}</option>
+                                    <option value="{{$key->area_id}}">{{$key->area_nama}}</option>
                                 @endif
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Waroeng</label>
+                        <select class="selection form-control" name="waroeng_id" id="waroeng">
+                            <option value="0" disable="true" selected="true">-Pilih Nama Waroeng-</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -102,9 +121,40 @@
         </div>
     </div>
 @endsection
+{{--@section('js')--}}
+    {{--<script>--}}
+        {{--$(function () {--}}
+            {{--$('#kategori').val([--}}
+
+
+                {{--@foreach($data->detail_komplain as $d)--}}
+                {{--{{$d->id_kategori}},--}}
+                {{--@endforeach--}}
+            {{--]).trigger('change');--}}
+        {{--});--}}
+    {{--</script>--}}
+{{--@endsection--}}
 @section('js')
-    <script>
-        $(function () {
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function coba(id){
+            alert(id);
+        }
+        $(document).ready(function(){
+            var area_id = $("#area").val();
+            $.get("{{route('komplain.select')}}?id=" + area_id,function(data) {
+                $('#waroeng').empty();
+                $('#waroeng').append('<option value="0" disable="true" selected="true">-Pilih Nama Waroeng-</option>');
+
+                $.each(data, function(index, waroengObj){
+                    $('#waroeng').append('<option value="'+ waroengObj.waroeng_id +'">'+ waroengObj.waroeng_nama +'</option>');
+                });
+
+            })
+                .then(function(){
+                    $('#waroeng').val(['{{$data->waroeng->waroeng_id}}']).trigger('change');
+                });
+            $('#kategori').select2();
             $('#kategori').val([
 
 
@@ -112,6 +162,25 @@
                 {{$d->id_kategori}},
                 @endforeach
             ]).trigger('change');
+
+            $(document).on('change','.area', function(e){
+                var area_id = $(this).val();
+                console.log(e);
+                var area_id = e.target.value;
+                console.log(area_id);
+                $.get("{{route('komplain.select')}}?id=" + area_id,function(data) {
+
+                    console.log(data);
+
+                    $('#waroeng').empty();
+                    $('#waroeng').append('<option value="0" disable="true" selected="true">-Pilih Nama Waroeng-</option>');
+
+                    $.each(data, function(index, waroengObj){
+                        $('#waroeng').append('<option value="'+ waroengObj.waroeng_id +'">'+ waroengObj.waroeng_nama +'</option>');
+                    });
+                });
+
+            });
         });
     </script>
 @endsection

@@ -19,6 +19,9 @@ Route::prefix('komplain')->group(function() {
     Route::post('/update/{id}', 'KomplainController@update')->name('komplain.update');
     Route::delete('/delete/{id}', 'KomplainController@destroy')->name('komplain.destroy');
 
+    Route::get('/show/{id}', 'KomplainController@show')->name('komplain.show');
+    Route::get('/json-waroeng/','KomplainController@waroeng')->name('komplain.select');
+
     Route::get('/chart/', 'KomplainController@chart')->name('komplain.chart');
 //    Route::get('/chartarea/', 'KomplainController@chartarea')->name('komplain.chartarea');
 

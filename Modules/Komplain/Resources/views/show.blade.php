@@ -16,54 +16,49 @@
                 <h1>Komplain</h1>
                 <br>
                 <a href="{{ route('komplain.create')}}" class="btn btn-primary btn-sm pull-left marginBottom20px"><span
-                        class="glyphicon glyphicon-plus"> Tambah Komplain</span></a>
+                        class="glyphicon glyphicon-plus"> Tambah</span></a>
                 <br>
                 <br>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th rowspan="2">No</th>
-                        <th rowspan="2">Nama Area</th>
+                        <th rowspan="2">Nama Waroeng</th>
                         <th colspan="12">Bulan</th>
                         <th rowspan="2">Tahun</th>
                         <th rowspan="2">Total</th>
                         <th rowspan="2">Action</th>
                     </tr>
                     <tr>
-                            @for ($i = 1 ; $i <= 12; $i++)
-                                <th>
+                        @for ($i = 1 ; $i <= 12; $i++)
+                            <td>
                                 {{date('M', mktime(0,0,0,$i,1))}}
-                                </th>
-                            @endfor
+                            </td>
+                        @endfor
                     </tr>
                     </thead>
 
                     <tbody>
-                    @if (count($data->komplain)==0)
+                    @if (count($data->area)==0)
                         <tr>
-                            <td colspan="10" class="text-center">Tidak Ada Data</td>
+                            <td colspan="17" class="text-center">Tidak Ada Data</td>
                         </tr>
                     @else
-                        @foreach ($data->komplain as $key)
+                        @foreach ($data->area as $area)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$key->area_nama}}</td>
+                                <td>{{$area->waroeng_nama}}</td>
                                 @for ($i = 1 ; $i <= 12; $i++)
-                                    @if(\Carbon\Carbon::parse($key->tanggal_komplain)->format('M') === date('M', mktime(0,0,0,$i,1,1)) && \Carbon\Carbon::parse($key->tanggal_komplain)->format('Y') === date('Y', mktime(0,0,0,$i,1,1)) )
+                                    @if(\Carbon\Carbon::parse($area->tanggal_komplain)->format('M') === date('M', mktime(0,0,0,$i,1)))
 
-                                        <td>{{\Carbon\Carbon::parse($key->tanggal_komplain)->format('M')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($area->tanggal_komplain)->format('M')}}</td>
                                     @else
                                         <td> - </td>
                                     @endif
                                 @endfor
-                                <td></td>
-                                <td></td>
                                 <td>
-                                    @if($key->area_id)
-                                        <a href="{{ route('komplain.show', $key->area_id)}}" class="btn btn-success">Show</a>
-                                    @else
-                                        -
-                                    @endif
+                                    <a href="{{ route('komplain.show', $area->komplain_id)}}"
+                                       class="btn btn-success">Show</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -74,4 +69,3 @@
         </div>
     </div>
 @endsection
-

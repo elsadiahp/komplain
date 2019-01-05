@@ -5,3 +5,9 @@
 <link href="{{ asset('back-end/css/style.css')}}" rel="stylesheet">
 <link href="{{ asset('back-end/vendors/pace-progress/css/pace.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+<style>
+    .table thead th  {
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>

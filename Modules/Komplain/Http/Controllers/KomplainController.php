@@ -5,6 +5,7 @@ namespace Modules\Komplain\Http\Controllers;
 use App\Models\Area;
 use App\Models\Bagian;
 use App\Models\KategoriDetail;
+use App\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -26,19 +27,16 @@ class KomplainController extends Controller
     public function index()
     {
         $data = new \stdClass();
-        $data->detail_komplain = KomplainDetail::with(['komplain', 'tb_kategori', ])->get();
-        $data->kat =DB::table('tb_kategori')->where('id_kategori_parent', '=', null)->get();
-        $data->kategori = TbKategori::all();
-//        $data->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
-        $data->bagian = Bagian::all();
 
-        $data->komplain = DB::table('komplain')
-            ->join('waroeng', 'waroeng.waroeng_id', '=', 'komplain.waroeng_id')
-            ->join('komplain_detail', 'komplain.komplain_id', '=', 'komplain_detail.komplain_id')
-//            ->join('kategori_detail', 'kategori_detail.kategori_detail_id', '=', 'komplain_detail.kategori_detail_id')
-            ->groupBy('komplain.komplain_id')
+        $data->komplain = DB::table('area')
+            ->leftJoin('waroeng', 'area.area_id', '=', 'waroeng.area_id')
+            ->leftJoin('komplain', 'waroeng.waroeng_id', '=', 'komplain.waroeng_id')
+            ->leftJoin('komplain_detail', 'komplain_detail.komplain_id', '=', 'komplain.komplain_id')
+            ->groupBy('area.area_nama')
             ->get();
         $no = 1;
+
+//        $jumlah = count();
 
         return view('komplain::index', compact('data', 'no'));
 
@@ -49,6 +47,7 @@ class KomplainController extends Controller
         $data = new \stdClass();
         $data->komplain = Komplain::all();
         $data->waroeng = Waroeng::all();
+        $data->area = Area::all();
         $data->kategori = DB::table('tb_kategori')->where('id_kategori_parent', '=', null)->get();
         $data->detail_komplain = KomplainDetail::all();
         $data->bagian = Bagian::all();
@@ -88,9 +87,19 @@ class KomplainController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
-        return view('komplain::show');
+        $data = new \stdClass();
+        $data->area = DB::table('komplain')
+            ->join('waroeng', 'waroeng.waroeng_id', 'komplain.waroeng_id')
+            ->join('area', 'area.area_id', 'waroeng.area_id')
+            ->where('waroeng.area_id', '=', $id)
+//            ->groupBy('area.area_id')
+            ->get();
+
+        $no = 1;
+
+        return view('komplain::show', compact('data', 'no'));
     }
 
     /**
@@ -101,10 +110,13 @@ class KomplainController extends Controller
     {
         $data = new \stdClass();
         $data->komplain = Komplain::find($id);
-        $data->waroeng = Waroeng::all();
         $data->kategori = TbKategori::all();
+        $id_waroeng = $data->komplain->waroeng_id;
+        $data->waroeng = Waroeng::with('area')->where('waroeng_id',$id_waroeng)->first();
+        $data->area = Area::all();
 //        $data->detail_kategori = KategoriDetail::all();
-        $data->detail_komplain = KomplainDetail::all();
+//        $data->detail_komplain = KomplainDetail::all();
+        $data->detail_komplain = KomplainDetail::where('komplain_id', $id)->get();
         $data->sub = DB::table('tb_kategori')->where('id_kategori_parent', '!=', null)->get();
 
 
@@ -161,6 +173,10 @@ class KomplainController extends Controller
             $komplain->delete();
         }
         return redirect()->route('komplain.index');
+    }
+    public function waroeng(Request $request)
+    {
+        return Waroeng::where('area_id',  $request->id)->get();
     }
 
 }
