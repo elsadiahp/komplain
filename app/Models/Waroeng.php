@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 01 Jan 2019 16:42:24 +0700.
+ * Date: Sat, 05 Jan 2019 12:36:48 +0700.
  */
 
 namespace App\Models;
@@ -21,6 +21,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property \App\Models\Area $area
  * @property \Illuminate\Database\Eloquent\Collection $komplains
+ * @property \Illuminate\Database\Eloquent\Collection $users
  *
  * @package App\Models
  */
@@ -47,5 +48,10 @@ class Waroeng extends Eloquent
 	public function komplains()
 	{
 		return $this->hasMany(\App\Models\Komplain::class);
+	}
+
+	public function users()
+	{
+		return $this->hasMany(\App\Models\User::class, 'users_waroeng_id');
 	}
 }

@@ -31,7 +31,7 @@ class KomplainController extends Controller
                         ->join('waroeng','waroeng.waroeng_id','=','komplain.waroeng_id')
                         ->join('komplain_detail','komplain_detail.komplain_id','=','komplain.komplain_id')
                         ->groupBy('komplain.komplain_id')
-                        ->get();        
+                        ->get();               
         $no = 1;
 
         return view('komplain::index', compact('data', 'no'));

@@ -17,6 +17,11 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('permission.index')}}">
+                <i class="nav-icon icon-speedometer"></i> Hak Akses
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="{{ route('area.index')}}">
                 <i class="nav-icon icon-speedometer"></i> Area 
               </a>

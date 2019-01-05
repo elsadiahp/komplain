@@ -18,13 +18,13 @@ class AddColoumOnTableUsers extends Migration
 
             $table->unsignedInteger('users_waroeng_id')->after('username')->nullable();
             $table->foreign('users_waroeng_id')->references('waroeng_id')->on('waroeng');
-            
-            $table->unsignedInteger('users_area_id')->after('users_waroeng_id');
+
+            $table->unsignedInteger('users_area_id')->after('users_waroeng_id')->nullable(false);
             $table->foreign('users_area_id')->references('area_id')->on('area');
         });
     }
 
-    /**
+    /**php 
      * Reverse the migrations.
      *
      * @return void

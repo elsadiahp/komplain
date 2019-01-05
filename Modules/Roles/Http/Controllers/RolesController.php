@@ -41,9 +41,9 @@ class RolesController extends Controller
     {
         $role = new Role();
 
-        $role->name = $request->input('name');
-        $role->display_name = $request->input('display_name');
-        $role->description = $request->input('description');
+        $role->name = $request->name;
+        $role->display_name = $request->display_name;
+        $role->description = $request->description;
         $role->save();
 
         $role_id = $role->id;
@@ -77,9 +77,7 @@ class RolesController extends Controller
         
         $role = Role::find($id);
         $permission = Permission::get();
-        // return $rolePermissions = DB::table("permission_role")->where("permission_role.role_id",$id)
-        //     ->pluck('permission_role.permission_id','permission_role.permission_id');
-        // $rolePermissions = PermissionRole::pluck('permission_id','role_id');
+
         $rolePermissions = $role->permissions()->pluck('permission_id','permission_id')->toArray();
 
 
@@ -109,15 +107,8 @@ class RolesController extends Controller
         DB::table("permission_role")->where("permission_role.role_id",$id)
                                     ->delete();
 
-
-        // foreach ($request->input('permission') as $key) {
-        //             $role->attachPermission($key);
-        // }
         $role_id = $role->id;
-
         $role->permissions()->sync($request->permission, $role_id);
-
-
 
         return redirect()->route('roles.index')
                          ->with('success','Role updated successfully');
