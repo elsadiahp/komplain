@@ -80,7 +80,6 @@ class RolesController extends Controller
 
         $rolePermissions = $role->permissions()->pluck('permission_id','permission_id')->toArray();
 
-
         return view('roles::edit',compact('role','permission','rolePermissions'));
     }
 

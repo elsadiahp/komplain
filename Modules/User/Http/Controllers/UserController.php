@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use App\Models\User;
+use App\Models\RoleUser;
 use App\Models\Role;
 use DB;
 use Hash;
@@ -18,11 +19,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return $data = User::with(['area','waroeng'])->get();
-        // ->orderBy('id','DESC')->paginate(5);
-        // return $data = DB::table('users')->join('area','area.area_id','=','users.users_area_id')->get();
+        $data = User::with('roles')->orderBy('id','DESC')->paginate(5);
 
-        return view('user::index',compact('data'))
+        return view('user::user_index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -32,9 +31,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::lists('display_name','id');
+        $roles = Role::all();
 
-        return view('user::create',compact('roles'));
+        return view('user::user_create',compact('roles'));
     }
 
     /**
@@ -44,26 +43,25 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'username' => 'required|unique:users,username',
-            'users_area_id' => 'required',
-            'users_waroeng_id',
-            'email' => 'required|email',
-            'password' => 'required|same:confirm-password',
-            'roles' => 'required',
-        ]);
-
+        
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'username' => 'required|unique:users,username',
+        //     'users_waroeng_id',
+        //     'email' => 'required|email',
+        //     'password' => 'required|same:confirm-password',
+        //     'roles' => 'required',
+        // ]);
+        // $user = new User();
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
-
-
+            
         $user = User::create($input);
-        foreach ($request->input('roles') as $key => $value) {
-            $user->attachRole($value);
-        }
 
+        $user_id = $user->id;
+
+        $user->roles()->sync($request->roles, $user_id);
 
         return redirect()->route('users.index')
                         ->with('success','User created successfully');
@@ -73,22 +71,23 @@ class UserController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
-        return view('user::show');
+
+        return view('user::user_show',compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      * @return Response
      */
-    public function edit()
+    public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::lists('display_name','id');
-        $userRole = $user->roles->lists('id','id')->toArray();
+        $user = User::with('roles')->find($id);
+        $roles = Role::get();
+        $userRole = RoleUser::where('user_id',$id)->first(); 
 
-        return view('user::edit',compact('user','roles','userRole'));
+        return view('user::user_edit',compact('user','roles','userRole'));
     }
 
     /**
@@ -96,17 +95,17 @@ class UserController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'username' => 'required|unique:users,username',
-            'users_area_id' => 'required',
-            'users_waroeng_id',
-            'email' => 'required|email',
-            'password' => 'same:confirm-password',
-            'roles' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'username' => 'required|unique:users,username',
+        //     'users_area_id' => 'required',
+        //     'users_waroeng_id',
+        //     'email' => 'required|email',
+        //     'password' => 'same:confirm-password',
+        //     'roles' => 'required'
+        // ]);
 
 
         $input = $request->all();
@@ -121,13 +120,12 @@ class UserController extends Controller
         $user->update($input);
         DB::table('role_user')->where('user_id',$id)->delete();
 
-        
-        foreach ($request->input('roles') as $key => $value) {
-            $user->attachRole($value);
-        }
+        $user_id = $user->id;
+
+        $user->roles()->sync($request->roles, $user_id);
 
 
-        return redirect()->route('user::index')
+        return redirect()->route('users.index')
                         ->with('success','User updated successfully');
     }
 

@@ -65,7 +65,6 @@ class KomplainController extends Controller
             $detail_komplain = new KomplainDetail();
             $detail_komplain->komplain_id = $komplain->komplain_id;
             $detail_komplain->id_kategori = $tags;
-            // dd($detail_komplain);
             $detail_komplain->save();
         }
         Session::flash('success', ' Komplain added successfully');
